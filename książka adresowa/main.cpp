@@ -637,9 +637,85 @@ void edytujKontakt(vector<kontakt> &kontakty, int iloscKontaktow) {
 
 }
 
+int rejestracja (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow) {
+
+string nazwa, haslo;
+fstream ksiazkaAdresowa;
+    Uzytkownik nowyUzytkownik;
+
+    cout<<"Podaj nazwe uzytkownika: ";
+    cin.sync();
+    getline(cin, nazwa);
+
+    int i = 0;
+
+    while (i<iloscUzytkownikow)
+    {
+        if (uzytkownicy[i].nazwa == nazwa)
+        {
+            cout<<"Taki uzytkownik istnieje. Wpisz inna nazwe uzytkownika: ";
+            cin>>nazwa;
+            i=0;
+        }
+
+        else i++;
+
+    }
+    cout<<"Podaj haslo: ";
+    cin>>haslo;
+    uzytkownicy[iloscUzytkownikow].nazwa = nazwa;
+    uzytkownicy[iloscUzytkownikow].haslo = haslo;
+    uzytkownicy[iloscUzytkownikow].id = iloscUzytkownikow+1;
+    cout<<"Konto zalozone"<<endl;
+    Sleep(1000);
+    return iloscUzytkownikow+1;
+
+}
+
+int logowanie (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow)  {
+
+    string nazwa, haslo;
+    cout<<"Podaj login: ";
+    cin>>nazwa;
+    int i = 0;
+
+    while (i<iloscUzytkownikow)
+    {
+        if (uzytkownicy[i].nazwa == nazwa)
+        {
+
+            for (int proby=0; proby<3; proby++)
+            {
+
+                cout<<"Podaj haslo. Pozostalo prob "<<3-proby<<": ";
+                cin>>haslo;
+
+                if (uzytkownicy[i].haslo == haslo)
+                {
+                    cout<<"Zalogowales sie."<<endl;
+                    Sleep(1000);
+                    return uzytkownicy[i].id;
+                }
+
+
+            }
+            cout<<"Podales 3 razy bledne haslo. Poczekaj 3 sekundy przed kolejna proba"<<endl;
+            Sleep(3000);
+            return 0;
+        }
+
+        i++;
+    }
+
+    cout<<"Nie ma uzytkownika z takim loginem"<<endl;
+    Sleep(1000);
+    return 0;
+
+}
+
 void logowanieUzytkownika (int idZalogowanegoUzytkownika)
 {
-    vector<Uzytkownik> uzytkownik;
+    vector<Uzytkownik> uzytkownicy;
     //int idZalogowanegoUzytkownika = 0;
     int iloscUzytkownikow = 0;
 
@@ -657,7 +733,7 @@ void logowanieUzytkownika (int idZalogowanegoUzytkownika)
 
             if (wybor == '1')
             {
-                //iloscUzytkownikow = rejestracja (uzytkownicy, iloscUzytkownikow);
+                iloscUzytkownikow = rejestracja (uzytkownicy, iloscUzytkownikow);
 
 
             }
@@ -665,7 +741,7 @@ void logowanieUzytkownika (int idZalogowanegoUzytkownika)
             else if (wybor=='2')
             {
 
-                //idZalogowanegoUzytkownika=logowanie(uzytkownicy, iloscUzytkownikow);
+                idZalogowanegoUzytkownika=logowanie(uzytkownicy, iloscUzytkownikow);
             }
 
             else if (wybor=='3')
