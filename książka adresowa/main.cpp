@@ -13,6 +13,12 @@ struct kontakt {
 
 };
 
+struct Uzytkownik
+{
+    int id;
+    string nazwa, haslo;
+};
+
 int sprawdzIloscKontaktow(vector<kontakt> &kontakty) {
     int iloscKontaktow=0;
     kontakt zapisanyKontakt;
@@ -631,8 +637,59 @@ void edytujKontakt(vector<kontakt> &kontakty, int iloscKontaktow) {
 
 }
 
+void logowanieUzytkownika (int idZalogowanegoUzytkownika)
+{
+    vector<Uzytkownik> uzytkownik;
+    //int idZalogowanegoUzytkownika = 0;
+    int iloscUzytkownikow = 0;
+
+    char wybor;
+
+    while (1)
+    {
+        if (idZalogowanegoUzytkownika ==0)
+        {
+            system("cls");
+            cout<<"1. Rejestracja"<<endl;
+            cout<<"2. Logowanie"<<endl;
+            cout<<"3. Zakoncz program"<<endl;
+            cin>>wybor;
+
+            if (wybor == '1')
+            {
+                //iloscUzytkownikow = rejestracja (uzytkownicy, iloscUzytkownikow);
+
+
+            }
+
+            else if (wybor=='2')
+            {
+
+                //idZalogowanegoUzytkownika=logowanie(uzytkownicy, iloscUzytkownikow);
+            }
+
+            else if (wybor=='3')
+            {
+                exit(0);
+            }
+        }
+
+    }
+
+}
+
+
+
+
 int main() {
     vector<kontakt> kontakty;
+
+    int idZalogowanegoUzytkownika = 0;
+
+    logowanieUzytkownika(idZalogowanegoUzytkownika);
+
+
+
 
     int idKontaktu = 0;
     int iloscKontaktow = sprawdzIloscKontaktow(kontakty);
@@ -650,6 +707,8 @@ int main() {
             cout<<"4. Wyswietl wszystkie kontakty"<<endl;
             cout<<"5. Usun kontakt"<<endl;
             cout<<"6. Edytuj kontakt"<<endl;
+            cout<<"7. Zmiana hasla"<<endl;
+            cout<<"8. Wylogowanie"<<endl;
             cout<<"9. Zakoncz program"<<endl;
             cout<<"Twoj wybor: ";
             cin>>wybor;
@@ -685,6 +744,20 @@ int main() {
             else if (wybor=='6') {
                 edytujKontakt(kontakty, iloscKontaktow);
             }
+
+            else if (wybor == '7')
+            {
+                //zmianaHasla(uzytkownicy, iloscUzytkownikow, idZalogowanegoUzytkownika);
+
+
+            }
+
+            else if (wybor=='8')
+            {
+              //  idZalogowanegoUzytkownika=0;
+
+            }
+
 
             else if (wybor=='9') {
                 exit(0);
