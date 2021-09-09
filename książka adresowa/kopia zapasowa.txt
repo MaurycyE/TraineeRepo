@@ -1,0 +1,5 @@
+1|Virgo|Whitecrow|999000999|whitecrow@gmail.com|zaginiona wyspa|
+2|Blue|Nieznane|999000999|kolorek@gmail.com|dietershafen|
+5|Rachel|Vitharig|999000999|vitharig@gmail.com|zaginiona wyspa|
+14|Nathaniel|Vitharig|999000999|vitharig.nathe@gmail.com|zaginiona wyspa|
+15|Othello|nieznane|nieznany|othello@gmail.com|nieznany|
