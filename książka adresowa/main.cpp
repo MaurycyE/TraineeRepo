@@ -25,7 +25,7 @@ int sprawdzIloscKontaktow(vector<kontakt> &kontakty) {
 
     fstream ksiazkaAdresowa;
 
-    ksiazkaAdresowa.open("ksiazka adresowa.txt", ios::in);
+    ksiazkaAdresowa.open("Adresaci.txt", ios::in);
 
     if(ksiazkaAdresowa.good()==false)
         cout<<"!"<<endl;
@@ -71,7 +71,7 @@ int sprawdzNajwiekszaLiczbeID (vector<kontakt> &kontakty) {
 
     fstream ksiazkaAdresowa;
 
-    ksiazkaAdresowa.open("ksiazka adresowa.txt", ios::in);
+    ksiazkaAdresowa.open("Adresaci.txt", ios::in);
 
     if(ksiazkaAdresowa.good()==false)
         cout<<"!"<<endl;
@@ -110,7 +110,7 @@ int sprawdzNajwiekszaLiczbeID (vector<kontakt> &kontakty) {
 void wczytajOsobyZpliku (vector<kontakt> &kontakty) {
     fstream ksiazkaAdresowa;
 
-    ksiazkaAdresowa.open("ksiazka adresowa.txt", ios::in);
+    ksiazkaAdresowa.open("Adresaci.txt", ios::in);
 
     if(ksiazkaAdresowa.good()==false) {
         cout<<"Brak zapisanych kontaktow"<<endl;
@@ -188,7 +188,7 @@ void wczytajIdKontaktuPoDodaniuNowejOsoby (vector<kontakt> &kontakty) {
 
     fstream ksiazkaAdresowa;
 
-    ksiazkaAdresowa.open("ksiazka adresowa.txt", ios::in);
+    ksiazkaAdresowa.open("Adresaci.txt", ios::in);
 
     if(ksiazkaAdresowa.good()==false) {
         cout<<"Brak zapisanych kontaktow"<<endl;
@@ -268,7 +268,7 @@ int dodajKontakt (vector<kontakt> &kontakty, int iloscKontaktow) {
     zapisanyKontakt.adres=adres;
     zapisanyKontakt.idKontaktu=sprawdzNajwiekszaLiczbeID(kontakty)+1;
 
-    ksiazkaAdresowa.open("ksiazka adresowa.txt", ios::out | ios::app);
+    ksiazkaAdresowa.open("Adresaci.txt", ios::out | ios::app);
 
 
     ksiazkaAdresowa<<sprawdzNajwiekszaLiczbeID(kontakty)+1<<"|"<<imie<<"|"<<nazwisko<<"|"<<nrTelefonu<<"|"<<email<<"|"<<adres<<"|";
@@ -437,7 +437,7 @@ int usunKontakty (vector<kontakt> &kontakty, int iloscKontaktow) {
 
                 ofstream ksiazkaAdresowa;
 
-                ksiazkaAdresowa.open("ksiazka adresowa.txt", ios::out);
+                ksiazkaAdresowa.open("Adresaci.txt", ios::out);
 
 
                 for (auto &informacjeOkontakcie: kontakty) {
@@ -475,7 +475,7 @@ void zapiszNoweInformacjeWPliku (vector<kontakt> &kontakty) {
 
     ofstream ksiazkaAdresowa;
 
-    ksiazkaAdresowa.open("ksiazka adresowa.txt", ios::out);
+    ksiazkaAdresowa.open("Adresaci.txt", ios::out);
 
     for (auto &informacjeOkontakcie: kontakty) {
 
