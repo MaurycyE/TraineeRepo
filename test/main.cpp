@@ -84,11 +84,10 @@ int iloscUzytkownikow=0;
 }
 
 
-
 int rejestracja (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow )
 {
     string nazwa, haslo;
-    fstream WszyscyUzytkownicy;
+    fstream wszyscyUzytkownicy;
     Uzytkownik nowyUzytkownik;
 
     cout<<"Podaj nazwe uzytkownika: ";
@@ -111,21 +110,33 @@ int rejestracja (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow )
     }
     cout<<"Podaj haslo: ";
     cin>>haslo;
-    uzytkownicy[iloscUzytkownikow].nazwa = nazwa;
-    uzytkownicy[iloscUzytkownikow].haslo = haslo;
-    uzytkownicy[iloscUzytkownikow].id = iloscUzytkownikow+1;
+    nowyUzytkownik.nazwa = nazwa;
+    nowyUzytkownik.haslo = haslo;
+    nowyUzytkownik.idUzytkownika = iloscUzytkownikow+1;
+
+    wszyscyUzytkownicy.open("Uzytkownicy.txt", ios::out | ios::app);
+
+
+    wszyscyUzytkownicy<<iloscUzytkownikow+1<<"|"<<nazwa<<"|"<<haslo<<"|";
+    wszyscyUzytkownicy<<endl;
+
+    wszyscyUzytkownicy.close();
+
     cout<<"Konto zalozone"<<endl;
     Sleep(1000);
+
+    wczytajUzytkownikowZpliku (uzytkownicy);
     return iloscUzytkownikow+1;
 
 
 }
 
-int logowanie(Uzytkownik uzytkownicy[], int iloscUzytkownikow)
+int logowanie(vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow)
 {
     string nazwa, haslo;
     cout<<"Podaj login: ";
-    cin>>nazwa;
+    cin.sync();
+    getline(cin, nazwa);
     int i = 0;
 
     while (i<iloscUzytkownikow)
@@ -143,7 +154,7 @@ int logowanie(Uzytkownik uzytkownicy[], int iloscUzytkownikow)
                 {
                     cout<<"Zalogowales sie."<<endl;
                     Sleep(1000);
-                    return uzytkownicy[i].id;
+                    return uzytkownicy[i].idUzytkownika;
                 }
 
 
@@ -160,8 +171,8 @@ int logowanie(Uzytkownik uzytkownicy[], int iloscUzytkownikow)
     Sleep(1000);
     return 0;
 }
-
-void zmianaHasla(Uzytkownik uzytkownicy[], int iloscUzytkownikow, int idZalogowanegoUzytkownika)
+/*
+void zmianaHasla(vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow, int idZalogowanegoUzytkownika)
 {
     string haslo;
 
@@ -180,12 +191,12 @@ void zmianaHasla(Uzytkownik uzytkownicy[], int iloscUzytkownikow, int idZalogowa
 
 
 }
-
+*/
 int main()
 {
     vector<Uzytkownik> uzytkownicy;
     int idZalogowanegoUzytkownika = 0;
-    int iloscUzytkownikow = 0;
+    int iloscUzytkownikow = wczytajUzytkownikowZpliku (uzytkownicy);
 
     char wybor;
 
@@ -217,7 +228,7 @@ int main()
                 exit(0);
             }
         }
-
+/*
         else
         {
             system("cls");
@@ -239,6 +250,7 @@ int main()
 
             }
         }
+        */
 
 
     }
