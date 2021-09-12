@@ -15,7 +15,7 @@ struct kontakt {
 
 struct Uzytkownik
 {
-    int id;
+    int idUzytkownika;
     string nazwa, haslo;
 };
 
@@ -637,10 +637,80 @@ void edytujKontakt(vector<kontakt> &kontakty, int iloscKontaktow) {
 
 }
 
-int rejestracja (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow) {
+int wczytajUzytkownikowZpliku (vector <Uzytkownik> &uzytkownicy) {
 
-string nazwa, haslo;
-fstream ksiazkaAdresowa;
+  fstream listaUzytkownikow;
+int iloscUzytkownikow=0;
+
+    listaUzytkownikow.open("Uzytkownicy.txt", ios::in);
+
+    if(listaUzytkownikow.good()==false) {
+        cout<<"Nie ma jeszcze zapisanych uzytkownikow"<<endl;
+        Sleep(1000);
+    }
+
+    else {
+
+        int i=0;
+        int j=0;
+
+        string linia;
+        int licznikZnakuPrzerwy=0;
+        string danaInformacja="";
+
+        while(getline(listaUzytkownikow,linia)) {
+
+            for (int i=0; i<linia.length(); i++) {
+
+                if (linia[i]=='|') {
+
+                    licznikZnakuPrzerwy++;
+
+                    if(licznikZnakuPrzerwy%3==1) {
+
+                        Uzytkownik zapisanyUzytkownik;
+
+                        zapisanyUzytkownik.idUzytkownika=atoi(danaInformacja.c_str());
+                        uzytkownicy.push_back(zapisanyUzytkownik);
+                        iloscUzytkownikow++;
+
+                        danaInformacja="";
+
+                    }
+
+                    if(licznikZnakuPrzerwy%3==2) {
+
+                        uzytkownicy[j].nazwa=danaInformacja;
+                        danaInformacja="";
+                    }
+
+                     if(licznikZnakuPrzerwy%3==0) {
+
+                        uzytkownicy[j].haslo=danaInformacja;
+                        danaInformacja="";
+                        j++;
+                    }
+
+                    i++;
+                }
+
+                danaInformacja+=linia[i];
+            }
+
+        }
+
+    }
+
+    listaUzytkownikow.close();
+    return iloscUzytkownikow;
+
+
+}
+
+int rejestracja (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow )
+{
+    string nazwa, haslo;
+    fstream wszyscyUzytkownicy;
     Uzytkownik nowyUzytkownik;
 
     cout<<"Podaj nazwe uzytkownika: ";
@@ -663,21 +733,35 @@ fstream ksiazkaAdresowa;
     }
     cout<<"Podaj haslo: ";
     cin>>haslo;
-    uzytkownicy[iloscUzytkownikow].nazwa = nazwa;
-    uzytkownicy[iloscUzytkownikow].haslo = haslo;
-    uzytkownicy[iloscUzytkownikow].id = iloscUzytkownikow+1;
+    nowyUzytkownik.nazwa = nazwa;
+    nowyUzytkownik.haslo = haslo;
+    nowyUzytkownik.idUzytkownika = iloscUzytkownikow+1;
+
+    wszyscyUzytkownicy.open("Uzytkownicy.txt", ios::out | ios::app);
+
+
+    wszyscyUzytkownicy<<iloscUzytkownikow+1<<"|"<<nazwa<<"|"<<haslo<<"|";
+    wszyscyUzytkownicy<<endl;
+
+    wszyscyUzytkownicy.close();
+
     cout<<"Konto zalozone"<<endl;
     Sleep(1000);
+
+    wczytajUzytkownikowZpliku (uzytkownicy);
     return iloscUzytkownikow+1;
+
 
 }
 
-int logowanie (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow)  {
-
+int logowanie(vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow)
+{
     string nazwa, haslo;
     cout<<"Podaj login: ";
-    cin>>nazwa;
+    cin.sync();
+    getline(cin, nazwa);
     int i = 0;
+
 
     while (i<iloscUzytkownikow)
     {
@@ -694,7 +778,7 @@ int logowanie (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow)  {
                 {
                     cout<<"Zalogowales sie."<<endl;
                     Sleep(1000);
-                    return uzytkownicy[i].id;
+                    return uzytkownicy[i].idUzytkownika;
                 }
 
 
@@ -710,14 +794,13 @@ int logowanie (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow)  {
     cout<<"Nie ma uzytkownika z takim loginem"<<endl;
     Sleep(1000);
     return 0;
-
 }
 
-void logowanieUzytkownika (int idZalogowanegoUzytkownika)
+int logowanieUzytkownika (int idZalogowanegoUzytkownika)
 {
     vector<Uzytkownik> uzytkownicy;
     //int idZalogowanegoUzytkownika = 0;
-    int iloscUzytkownikow = 0;
+    int iloscUzytkownikow = wczytajUzytkownikowZpliku (uzytkownicy);
 
     char wybor;
 
@@ -742,6 +825,8 @@ void logowanieUzytkownika (int idZalogowanegoUzytkownika)
             {
 
                 idZalogowanegoUzytkownika=logowanie(uzytkownicy, iloscUzytkownikow);
+                return idZalogowanegoUzytkownika;
+
             }
 
             else if (wybor=='3')
@@ -762,9 +847,13 @@ int main() {
 
     int idZalogowanegoUzytkownika = 0;
 
-    logowanieUzytkownika(idZalogowanegoUzytkownika);
+    while (idZalogowanegoUzytkownika==0) {
 
+    idZalogowanegoUzytkownika = logowanieUzytkownika(idZalogowanegoUzytkownika);
+    //cout<<idZalogowanegoUzytkownika<<endl;
+    //getchar();
 
+    }
 
 
     int idKontaktu = 0;
