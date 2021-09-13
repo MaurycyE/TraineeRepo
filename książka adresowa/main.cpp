@@ -807,9 +807,9 @@ int logowanie(vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow)
     return 0;
 }
 
-int logowanieUzytkownika (int idZalogowanegoUzytkownika)
+int logowanieUzytkownika (vector<Uzytkownik> &uzytkownicy, int idZalogowanegoUzytkownika)
 {
-    vector<Uzytkownik> uzytkownicy;
+   // vector<Uzytkownik> uzytkownicy;
     //int idZalogowanegoUzytkownika = 0;
     int iloscUzytkownikow = wczytajUzytkownikowZpliku (uzytkownicy);
     /*
@@ -859,18 +859,58 @@ int logowanieUzytkownika (int idZalogowanegoUzytkownika)
 
 }
 
+void zapiszNoweInformacjeOuzytkowniku (vector<Uzytkownik> &uzytkownicy) {
+
+    ofstream wszyscyUzytkownicy;
+
+    wszyscyUzytkownicy.open("Uzytkownicy.txt", ios::out);
+
+    for (auto &informacjeOuzytkowniku: uzytkownicy) {
+
+        wszyscyUzytkownicy<<informacjeOuzytkowniku.idUzytkownika<<"|"<<informacjeOuzytkowniku.nazwa<<"|"<<informacjeOuzytkowniku.haslo<<"|";
+        wszyscyUzytkownicy<<endl;
+
+    }
+    wszyscyUzytkownicy.close();
+
+}
+
+
+void zmianaHasla(vector <Uzytkownik> &uzytkownicy, int idZalogowanegoUzytkownika)
+{
+
+    string haslo;
+
+    cout<<"Podaj nowe haslo: ";
+    cin>>haslo;
+    for (int i=0; i<uzytkownicy.size(); i++)
+    {
+        if(uzytkownicy[i].idUzytkownika==idZalogowanegoUzytkownika)
+        {
+            uzytkownicy[i].haslo=haslo;
+            zapiszNoweInformacjeOuzytkowniku(uzytkownicy);
+
+            cout<<"Haslo zostalo zmienione"<<endl;
+            Sleep(1500);
+        }
+
+    }
+
+
+}
 
 
 
 int main() {
 
     vector<kontakt> kontakty;
+    vector<Uzytkownik> uzytkownicy;
 
     int idZalogowanegoUzytkownika = 0;
 
     while (idZalogowanegoUzytkownika==0) {
 
-    idZalogowanegoUzytkownika = logowanieUzytkownika(idZalogowanegoUzytkownika);
+    idZalogowanegoUzytkownika = logowanieUzytkownika(uzytkownicy,idZalogowanegoUzytkownika);
    // cout<<idZalogowanegoUzytkownika<<endl;
 
 
@@ -936,7 +976,7 @@ int main() {
 
             else if (wybor == '7')
             {
-                //zmianaHasla(uzytkownicy, iloscUzytkownikow, idZalogowanegoUzytkownika);
+                zmianaHasla(uzytkownicy, idZalogowanegoUzytkownika);
 
 
             }
@@ -946,7 +986,7 @@ int main() {
                 idZalogowanegoUzytkownika=0;
               while (idZalogowanegoUzytkownika==0) {
 
-    idZalogowanegoUzytkownika = logowanieUzytkownika(idZalogowanegoUzytkownika);
+    idZalogowanegoUzytkownika = logowanieUzytkownika(uzytkownicy, idZalogowanegoUzytkownika);
    // cout<<idZalogowanegoUzytkownika<<endl;
 
 
