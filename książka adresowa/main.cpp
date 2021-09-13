@@ -670,11 +670,20 @@ int iloscUzytkownikow=0;
 
                         Uzytkownik zapisanyUzytkownik;
 
-                        zapisanyUzytkownik.idUzytkownika=atoi(danaInformacja.c_str());
+                        danaInformacja=linia;
+                        string numerIDuzytkownika = danaInformacja.erase(i, danaInformacja.length()-i);
+
+                       // cout<<danaInformacja;
+                        //Sleep(1000);
+
+                        zapisanyUzytkownik.idUzytkownika=atoi(numerIDuzytkownika.c_str());
+                        //cout<<zapisanyUzytkownik.idUzytkownika;
+                        //Sleep(1000);
                         uzytkownicy.push_back(zapisanyUzytkownik);
                         iloscUzytkownikow++;
 
                         danaInformacja="";
+
 
                     }
 
@@ -695,6 +704,8 @@ int iloscUzytkownikow=0;
                 }
 
                 danaInformacja+=linia[i];
+                //cout<<danaInformacja;
+                //Sleep(1000);
             }
 
         }
@@ -801,7 +812,16 @@ int logowanieUzytkownika (int idZalogowanegoUzytkownika)
     vector<Uzytkownik> uzytkownicy;
     //int idZalogowanegoUzytkownika = 0;
     int iloscUzytkownikow = wczytajUzytkownikowZpliku (uzytkownicy);
+    /*
+    for (int i=0; i<iloscUzytkownikow; i++) {
+        cout<<uzytkownicy[i].idUzytkownika<<endl;
+        cout<<uzytkownicy[i].nazwa<<endl;
+        cout<<uzytkownicy[i].haslo<<endl;
+        cout<<endl;
 
+    }
+    Sleep(3000);
+*/
     char wybor;
 
     while (1)
@@ -843,6 +863,7 @@ int logowanieUzytkownika (int idZalogowanegoUzytkownika)
 
 
 int main() {
+
     vector<kontakt> kontakty;
 
     int idZalogowanegoUzytkownika = 0;
@@ -850,11 +871,12 @@ int main() {
     while (idZalogowanegoUzytkownika==0) {
 
     idZalogowanegoUzytkownika = logowanieUzytkownika(idZalogowanegoUzytkownika);
-    //cout<<idZalogowanegoUzytkownika<<endl;
-    //getchar();
+   // cout<<idZalogowanegoUzytkownika<<endl;
+
 
     }
-
+//cout<<idZalogowanegoUzytkownika<<endl;
+  //          getchar();
 
     int idKontaktu = 0;
     int iloscKontaktow = sprawdzIloscKontaktow(kontakty);
@@ -864,6 +886,8 @@ int main() {
     char wybor;
 
     while (1) {
+
+
         if (idKontaktu ==0) {
             system("cls");
             cout<<"1. Dodaj kontakt"<<endl;
@@ -919,7 +943,14 @@ int main() {
 
             else if (wybor=='8')
             {
-              //  idZalogowanegoUzytkownika=0;
+                idZalogowanegoUzytkownika=0;
+              while (idZalogowanegoUzytkownika==0) {
+
+    idZalogowanegoUzytkownika = logowanieUzytkownika(idZalogowanegoUzytkownika);
+   // cout<<idZalogowanegoUzytkownika<<endl;
+
+
+    }
 
             }
 
