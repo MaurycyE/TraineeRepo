@@ -8,7 +8,7 @@
 using namespace std;
 
 struct kontakt {
-    int idKontaktu;
+    int idKontaktu, idUzytkownika;
     string imie, nazwisko, nrTelefonu, email, adres;
 
 };
@@ -18,6 +18,17 @@ struct Uzytkownik
     int idUzytkownika;
     string nazwa, haslo;
 };
+
+bool sprawdzNumerIDuzytkownika (int idZalogowanegoUzytkownika, int sprawdzanyNumerUzytkownika) {
+
+if (idZalogowanegoUzytkownika==sprawdzanyNumerUzytkownika)
+    return true;
+
+    else
+        return false;
+
+}
+
 
 int sprawdzIloscKontaktow(vector<kontakt> &kontakty) {
     int iloscKontaktow=0;
@@ -42,7 +53,7 @@ int sprawdzIloscKontaktow(vector<kontakt> &kontakty) {
                 if(linia[i]=='|') {
                     licznikZnakuPrzerwy++;
 
-                    if (licznikZnakuPrzerwy%6==1) {
+                    if (licznikZnakuPrzerwy%7==1) {
 
                         kontakt zapisanyKontakt;
                         string danaInformacja=linia;
@@ -88,7 +99,7 @@ int sprawdzNajwiekszaLiczbeID (vector<kontakt> &kontakty) {
                 if(linia[i]=='|') {
                     licznikZnakuPrzerwy++;
 
-                    if (licznikZnakuPrzerwy%6==1) {
+                    if (licznikZnakuPrzerwy%7==1) {
                         kontakt zapisanyKontakt;
                         string danaInformacja=linia;
                         string numerIDkontaktu = danaInformacja.erase(i, danaInformacja.length()-i);
@@ -107,7 +118,7 @@ int sprawdzNajwiekszaLiczbeID (vector<kontakt> &kontakty) {
 }
 
 
-void wczytajOsobyZpliku (vector<kontakt> &kontakty) {
+int wczytajOsobyZpliku (vector<kontakt> &kontakty, int idZalogowanegoUzytkownika, int iloscKontaktow) {
     fstream ksiazkaAdresowa;
 
     ksiazkaAdresowa.open("Adresaci.txt", ios::in);
@@ -124,6 +135,7 @@ void wczytajOsobyZpliku (vector<kontakt> &kontakty) {
         string linia;
         int licznikZnakuPrzerwy=0;
         string danaInformacja="";
+        int odczytaneIDuzytkownika=0;
 
         while(getline(ksiazkaAdresowa,linia)) {
 
@@ -133,40 +145,69 @@ void wczytajOsobyZpliku (vector<kontakt> &kontakty) {
 
                     licznikZnakuPrzerwy++;
 
-                    if(licznikZnakuPrzerwy%6==1) {
+                    if(licznikZnakuPrzerwy%7==1) {
 
                         danaInformacja="";
 
                     }
 
-                    if(licznikZnakuPrzerwy%6==2) {
+                    //if(sprawdzNumerIDuzytkownika(idZalogowanegoUzytkownika, atoi(danaInformacja.c_str()) )==true){
+
+                    if(licznikZnakuPrzerwy%7==2) {
+
+                        odczytaneIDuzytkownika = atoi(danaInformacja.c_str());
+                        //if (odczytaneIDuzytkownika==idZalogowanegoUzytkownika){
+
+                            kontakty[j].idUzytkownika=atoi(danaInformacja.c_str());
+                        danaInformacja="";
+                      //  }
+                      //  else
+                         //   danaInformacja="";
+
+
+                    }
+
+                    if(licznikZnakuPrzerwy%7==3) {
 
                         kontakty[j].imie=danaInformacja;
                         danaInformacja="";
                     }
 
-                    if(licznikZnakuPrzerwy%6==3) {
+                    if(licznikZnakuPrzerwy%7==4) {
 
                         kontakty[j].nazwisko=danaInformacja;
                         danaInformacja="";
                     }
 
-                    if(licznikZnakuPrzerwy%6==4) {
+                    if(licznikZnakuPrzerwy%7==5) {
 
                         kontakty[j].nrTelefonu=danaInformacja;
                         danaInformacja="";
                     }
 
-                    if(licznikZnakuPrzerwy%6==5) {
+                    if(licznikZnakuPrzerwy%7==6) {
 
                         kontakty[j].email=danaInformacja;
                         danaInformacja="";
                     }
 
-                    if(licznikZnakuPrzerwy%6==0) {
+                    if(licznikZnakuPrzerwy%7==0) {
 
                         kontakty[j].adres=danaInformacja;
                         danaInformacja="";
+
+
+
+                    if(kontakty[j].idUzytkownika != idZalogowanegoUzytkownika) {
+
+                        kontakty.erase(kontakty.begin()+j);
+                       // cout<<kontakty.size();
+                        //Sleep(2000);
+
+                    }
+
+
+                        else
                         j++;
                     }
 
@@ -174,6 +215,7 @@ void wczytajOsobyZpliku (vector<kontakt> &kontakty) {
                 }
 
                 danaInformacja+=linia[i];
+
             }
 
         }
@@ -181,6 +223,8 @@ void wczytajOsobyZpliku (vector<kontakt> &kontakty) {
     }
 
     ksiazkaAdresowa.close();
+    iloscKontaktow=kontakty.size();
+    return iloscKontaktow;
 
 }
 
@@ -211,7 +255,7 @@ void wczytajIdKontaktuPoDodaniuNowejOsoby (vector<kontakt> &kontakty) {
 
                     licznikZnakuPrzerwy++;
 
-                    if(licznikZnakuPrzerwy%6==1) {
+                    if(licznikZnakuPrzerwy%7==1) {
 
                         string danaInformacja=linia;
                         string numerIDkontaktu = danaInformacja.erase(i, danaInformacja.length()-i);
@@ -222,7 +266,7 @@ void wczytajIdKontaktuPoDodaniuNowejOsoby (vector<kontakt> &kontakty) {
 
                     }
 
-                    if(licznikZnakuPrzerwy%6==0) {
+                    if(licznikZnakuPrzerwy%7==0) {
 
                         danaInformacja="";
                         j++;
@@ -241,7 +285,7 @@ void wczytajIdKontaktuPoDodaniuNowejOsoby (vector<kontakt> &kontakty) {
 
 }
 
-int dodajKontakt (vector<kontakt> &kontakty, int iloscKontaktow) {
+int dodajKontakt (vector<kontakt> &kontakty, int iloscKontaktow, int idUzytkownika) {
 
     string imie, nazwisko, nrTelefonu, email, adres;
     fstream ksiazkaAdresowa;
@@ -267,11 +311,12 @@ int dodajKontakt (vector<kontakt> &kontakty, int iloscKontaktow) {
     zapisanyKontakt.email=email;
     zapisanyKontakt.adres=adres;
     zapisanyKontakt.idKontaktu=sprawdzNajwiekszaLiczbeID(kontakty)+1;
+    zapisanyKontakt.idUzytkownika=idUzytkownika;
 
     ksiazkaAdresowa.open("Adresaci.txt", ios::out | ios::app);
 
 
-    ksiazkaAdresowa<<sprawdzNajwiekszaLiczbeID(kontakty)+1<<"|"<<imie<<"|"<<nazwisko<<"|"<<nrTelefonu<<"|"<<email<<"|"<<adres<<"|";
+    ksiazkaAdresowa<<sprawdzNajwiekszaLiczbeID(kontakty)+1<<"|"<<idUzytkownika<<"|"<<imie<<"|"<<nazwisko<<"|"<<nrTelefonu<<"|"<<email<<"|"<<adres<<"|";
     ksiazkaAdresowa<<endl;
 
     ksiazkaAdresowa.close();
@@ -280,7 +325,7 @@ int dodajKontakt (vector<kontakt> &kontakty, int iloscKontaktow) {
     Sleep(1000);
 
 
-    wczytajOsobyZpliku(kontakty);
+    wczytajOsobyZpliku(kontakty, idUzytkownika, iloscKontaktow);
     wczytajIdKontaktuPoDodaniuNowejOsoby(kontakty);
     return iloscKontaktow+1;
 
@@ -289,6 +334,7 @@ int dodajKontakt (vector<kontakt> &kontakty, int iloscKontaktow) {
 void wyswietlWszystkieKontakty (vector<kontakt> &kontakty, int iloscKontaktow) {
 
     for (int i=0; i<iloscKontaktow; i++) {
+            cout<<kontakty[i].idUzytkownika<<endl;
         cout<<kontakty[i].imie<<endl;
         cout<<kontakty[i].nazwisko<<endl;
         cout<<kontakty[i].nrTelefonu<<endl;
@@ -916,12 +962,13 @@ int main() {
 
     }
 //cout<<idZalogowanegoUzytkownika<<endl;
-  //          getchar();
+  //          Sleep(2000);
 
     int idKontaktu = 0;
     int iloscKontaktow = sprawdzIloscKontaktow(kontakty);
 
-    wczytajOsobyZpliku(kontakty);
+    iloscKontaktow = wczytajOsobyZpliku(kontakty, idZalogowanegoUzytkownika, iloscKontaktow);
+
     string imie, nazwisko;
     char wybor;
 
@@ -944,7 +991,7 @@ int main() {
             cout<<endl;
 
             if (wybor == '1') {
-                iloscKontaktow = dodajKontakt (kontakty, iloscKontaktow);
+                iloscKontaktow = dodajKontakt (kontakty, iloscKontaktow, idZalogowanegoUzytkownika);
 
             }
 
@@ -990,8 +1037,14 @@ int main() {
    // cout<<idZalogowanegoUzytkownika<<endl;
 
 
-    }
 
+    }
+    iloscKontaktow = sprawdzIloscKontaktow (kontakty);
+    cout<<iloscKontaktow<<endl;
+    Sleep(2000);
+iloscKontaktow = wczytajOsobyZpliku(kontakty, idZalogowanegoUzytkownika, iloscKontaktow);
+cout<<iloscKontaktow<<endl;
+    Sleep(2000);
             }
 
 
