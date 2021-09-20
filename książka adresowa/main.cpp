@@ -119,6 +119,136 @@ int sprawdzNajwiekszaLiczbeID (vector<kontakt> &kontakty) {
     return najwiekszaWartoscNumeruID;
 }
 
+void wczytajWszystkieOsobyZpliku (vector<kontakt> &pelnaListaKontaktow, int iloscKontaktow) {
+
+    //vector<kontakt> pelnaListaKontaktow;
+    fstream PelnaKsiazkaAdresowa;
+
+    PelnaKsiazkaAdresowa.open("Adresaci.txt", ios::in);
+
+    if(PelnaKsiazkaAdresowa.good()==true) {
+
+        int i=0;
+        int j=0;
+        string linia="";
+        int licznikZnakuPrzerwy=0;
+        string danaInformacja="";
+      //  int odczytaneIDuzytkownika=0;
+
+        while(getline(PelnaKsiazkaAdresowa,linia)) {
+
+            for (int i=0; i<linia.length(); i++) {
+
+                if (linia[i]=='|') {
+
+                    licznikZnakuPrzerwy++;
+
+                    if(licznikZnakuPrzerwy%7==1) {
+
+                        danaInformacja="";
+
+                    }
+
+                    //if(sprawdzNumerIDuzytkownika(idZalogowanegoUzytkownika, atoi(danaInformacja.c_str()) )==true){
+
+                    if(licznikZnakuPrzerwy%7==2) {
+
+                        //odczytaneIDuzytkownika = atoi(danaInformacja.c_str());
+                        //if (odczytaneIDuzytkownika==idZalogowanegoUzytkownika){
+
+                            pelnaListaKontaktow[j].idUzytkownika=atoi(danaInformacja.c_str());
+
+                        danaInformacja="";
+                      //  }
+                      //  else
+                         //   danaInformacja="";
+
+
+                    }
+
+                    if(licznikZnakuPrzerwy%7==3) {
+
+                        pelnaListaKontaktow[j].imie=danaInformacja;
+
+                        danaInformacja="";
+                    }
+
+                    if(licznikZnakuPrzerwy%7==4) {
+
+                        pelnaListaKontaktow[j].nazwisko=danaInformacja;
+                        danaInformacja="";
+                    }
+
+                    if(licznikZnakuPrzerwy%7==5) {
+
+                        pelnaListaKontaktow[j].nrTelefonu=danaInformacja;
+                        danaInformacja="";
+                    }
+
+                    if(licznikZnakuPrzerwy%7==6) {
+
+                        pelnaListaKontaktow[j].email=danaInformacja;
+                        danaInformacja="";
+                    }
+
+                    if(licznikZnakuPrzerwy%7==0) {
+
+                        pelnaListaKontaktow[j].adres=danaInformacja;
+                        danaInformacja="";
+
+
+/*
+                    if(kontakty[j].idUzytkownika != idZalogowanegoUzytkownika) {
+
+                           // vector<kontakt>  = kontakty;
+
+                        kontakty.erase(kontakty.begin()+j);
+                       // cout<<kontakty.size();
+                        //Sleep(2000);
+
+                    }
+*/
+
+                       // else
+                        j++;
+
+                    }
+
+                    i++;
+                }
+
+                danaInformacja+=linia[i];
+
+            }
+
+        }
+
+    }
+
+
+
+    PelnaKsiazkaAdresowa.close();
+   // pelnaListaKontaktow=kontakty;
+
+//    iloscKontaktow=kontakty.size();
+/*
+    for (int i=0; i<iloscKontaktow; i++) {
+            cout<<pelnaListaKontaktow[i].idUzytkownika<<endl;
+        cout<<pelnaListaKontaktow[i].imie<<endl;
+        cout<<pelnaListaKontaktow[i].nazwisko<<endl;
+        cout<<pelnaListaKontaktow[i].nrTelefonu<<endl;
+        cout<<pelnaListaKontaktow[i].email<<endl;
+        cout<<pelnaListaKontaktow[i].adres<<endl;
+        cout<<pelnaListaKontaktow[i].idKontaktu<<endl;
+        cout<<endl;
+
+    }
+    Sleep(5000);
+*/
+
+}
+
+
 
 int wczytajOsobyZpliku (vector<kontakt> &kontakty, int idZalogowanegoUzytkownika, int iloscKontaktow) {
 
@@ -316,7 +446,7 @@ void wczytajIdKontaktuPoDodaniuNowejOsoby (vector<kontakt> &kontakty) {
 
 }
 
-int dodajKontakt (vector<kontakt> &kontakty, int iloscKontaktow, int idUzytkownika) {
+int dodajKontakt (vector<kontakt> &pelnaListaKontaktow, vector<kontakt> &kontakty, int iloscKontaktow, int idUzytkownika) {
 
     string imie, nazwisko, nrTelefonu, email, adres;
     fstream ksiazkaAdresowa;
@@ -334,7 +464,7 @@ int dodajKontakt (vector<kontakt> &kontakty, int iloscKontaktow, int idUzytkowni
     cin.sync();
     getline(cin, adres);
 
-    kontakty.push_back(zapisanyKontakt);
+    pelnaListaKontaktow.push_back(zapisanyKontakt);
 
     zapisanyKontakt.imie=imie;
     zapisanyKontakt.nazwisko=nazwisko;
@@ -347,7 +477,7 @@ int dodajKontakt (vector<kontakt> &kontakty, int iloscKontaktow, int idUzytkowni
     ksiazkaAdresowa.open("Adresaci.txt", ios::out | ios::app);
 
 
-    ksiazkaAdresowa<<sprawdzNajwiekszaLiczbeID(kontakty)+1<<"|"<<idUzytkownika<<"|"<<imie<<"|"<<nazwisko<<"|"<<nrTelefonu<<"|"<<email<<"|"<<adres<<"|";
+    ksiazkaAdresowa<<sprawdzNajwiekszaLiczbeID(pelnaListaKontaktow)+1<<"|"<<idUzytkownika<<"|"<<imie<<"|"<<nazwisko<<"|"<<nrTelefonu<<"|"<<email<<"|"<<adres<<"|";
     ksiazkaAdresowa<<endl;
 
     ksiazkaAdresowa.close();
@@ -355,9 +485,11 @@ int dodajKontakt (vector<kontakt> &kontakty, int iloscKontaktow, int idUzytkowni
     cout<<"Kontakt dodany";
     Sleep(1000);
 
+    wczytajIdKontaktuPoDodaniuNowejOsoby(pelnaListaKontaktow);
+    kontakty=pelnaListaKontaktow;
 
     wczytajOsobyZpliku(kontakty, idUzytkownika, iloscKontaktow);
-    wczytajIdKontaktuPoDodaniuNowejOsoby(kontakty);
+
     return iloscKontaktow+1;
 
 }
@@ -981,7 +1113,9 @@ void zmianaHasla(vector <Uzytkownik> &uzytkownicy, int idZalogowanegoUzytkownika
 int main() {
 
     vector<kontakt> kontakty;
+    vector<kontakt> pelnaListaKontaktow;
     vector<Uzytkownik> uzytkownicy;
+
 
     int idZalogowanegoUzytkownika = 0;
 
@@ -997,6 +1131,9 @@ int main() {
 
     int idKontaktu = 0;
     int iloscKontaktow = sprawdzIloscKontaktow(kontakty);
+
+    int PelnaIloscKontaktow = sprawdzIloscKontaktow(pelnaListaKontaktow);
+    wczytajWszystkieOsobyZpliku (pelnaListaKontaktow, iloscKontaktow);
 
     iloscKontaktow = wczytajOsobyZpliku(kontakty, idZalogowanegoUzytkownika, iloscKontaktow);
 
@@ -1022,7 +1159,7 @@ int main() {
             cout<<endl;
 
             if (wybor == '1') {
-                iloscKontaktow = dodajKontakt (kontakty, iloscKontaktow, idZalogowanegoUzytkownika);
+                iloscKontaktow = dodajKontakt (pelnaListaKontaktow, kontakty, iloscKontaktow, idZalogowanegoUzytkownika);
 
             }
 
