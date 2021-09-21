@@ -1,3 +1,6 @@
 1|Virgo|Virgo11|
 2|Rachel|Rachel13|
-3|Blue|Kolorek|
+3|Blue|Kolorek13|
+1|||
+2|||
+3||Kolorek13|

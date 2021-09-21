@@ -128,7 +128,7 @@ void wczytajWszystkieOsobyZpliku (vector<kontakt> &pelnaListaKontaktow, int ilos
 
     if(PelnaKsiazkaAdresowa.good()==true) {
 
-        int i=0;
+       // int i=0;
         int j=0;
         string linia="";
         int licznikZnakuPrzerwy=0;
@@ -264,7 +264,7 @@ int wczytajOsobyZpliku (vector<kontakt> &kontakty, int idZalogowanegoUzytkownika
 
     else {
 
-        int i=0;
+       // int i=0;
         int j=0;
         string linia;
         int licznikZnakuPrzerwy=0;
@@ -398,7 +398,7 @@ void wczytajIdKontaktuPoDodaniuNowejOsoby (vector<kontakt> &kontakty) {
 
     else {
 
-        int i=0;
+        //int i=0;
         int j=0;
         string linia;
         int licznikZnakuPrzerwy=0;
@@ -564,7 +564,7 @@ void znajdzPoNazwisku (string nazwisko, vector<kontakt> &kontakty, int iloscKont
 
 }
 
-int usunKontakty (vector<kontakt> &kontakty, int iloscKontaktow) {
+int usunKontakty (vector<kontakt> &kontakty, vector<kontakt> &pelnaListaKontaktow, int iloscKontaktow) {
 
     int nrIdKontaktuDoUsuniecia;
 
@@ -646,16 +646,55 @@ int usunKontakty (vector<kontakt> &kontakty, int iloscKontaktow) {
 
                 ofstream ksiazkaAdresowa;
 
-                ksiazkaAdresowa.open("Adresaci.txt", ios::out);
+                ksiazkaAdresowa.open("Adresaci_tymczasowy.txt", ios::out|ios::app);
 
 
-                for (auto &informacjeOkontakcie: kontakty) {
+                for (auto &informacjeOkontakcie: pelnaListaKontaktow) {
 
-                    ksiazkaAdresowa<<informacjeOkontakcie.idKontaktu<<"|"<<informacjeOkontakcie.imie<<"|"<<informacjeOkontakcie.nazwisko<<"|"<<informacjeOkontakcie.nrTelefonu<<"|"<<informacjeOkontakcie.email<<"|"<<informacjeOkontakcie.adres<<"|";
+                             if (informacjeOkontakcie.idKontaktu==nrIdKontaktuDoUsuniecia){
+
+/*
+                        for (auto i = pelnaListaKontaktow.begin(); i!=pelnaListaKontaktow.end(); i++) {
+
+                    if(i->idKontaktu == nrIdKontaktuDoUsuniecia) {
+
+                        pelnaListaKontaktow.erase(i);
+                        break;
+                    }
+                        }
+                        */
+                       // pelnaListaKontaktow.erase(informacjeOkontakcie);
+                       // ksiazkaAdresowa<<i->idKontaktu<<"|"<<i->idUzytkownika<<"|"<<i->imie<<"|"<<i->nazwisko<<"|"<<i->nrTelefonu<<"|"<<i->email<<"|"<<i->adres<<"|";
+        ksiazkaAdresowa<<"";
+
+                    }
+
+                        else {
+
+                    ksiazkaAdresowa<<informacjeOkontakcie.idKontaktu<<"|"<<informacjeOkontakcie.idUzytkownika<<"|"<<informacjeOkontakcie.imie<<"|"<<informacjeOkontakcie.nazwisko<<"|"<<informacjeOkontakcie.nrTelefonu<<"|"<<informacjeOkontakcie.email<<"|"<<informacjeOkontakcie.adres<<"|";
                     ksiazkaAdresowa<<endl;
+                        }
 
                 }
                 ksiazkaAdresowa.close();
+
+                 for (auto i = pelnaListaKontaktow.begin(); i!=pelnaListaKontaktow.end(); i++) {
+
+                    if(i->idKontaktu == nrIdKontaktuDoUsuniecia) {
+
+                        pelnaListaKontaktow.erase(i);
+                        break;
+                    }
+                        }
+
+
+
+                remove("Adresaci.txt");
+    //Sleep(3000);
+    rename("Adresaci_tymczasowy.txt", "Adresaci.txt");
+
+    // int PelnaIloscKontaktow = sprawdzIloscKontaktow(pelnaListaKontaktow);
+   // wczytajWszystkieOsobyZpliku (pelnaListaKontaktow, iloscKontaktow);
 
                 iloscKontaktow = iloscKontaktow-1;
                 cout<<"Kontakt usuniety"<<endl;
@@ -664,7 +703,8 @@ int usunKontakty (vector<kontakt> &kontakty, int iloscKontaktow) {
                 return iloscKontaktow;
 
 
-            } else {
+            }
+            else {
                 cout<<"Kontakt zostanie zachowany"<<endl;
                 Sleep(1500);
                 return iloscKontaktow;
@@ -1214,7 +1254,7 @@ int main() {
             }
 
             else if (wybor=='5') {
-                iloscKontaktow = usunKontakty(kontakty, iloscKontaktow);
+                iloscKontaktow = usunKontakty(kontakty,pelnaListaKontaktow, iloscKontaktow);
 
             }
 
