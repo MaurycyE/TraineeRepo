@@ -18,7 +18,7 @@ struct Uzytkownik
     int idUzytkownika;
     string nazwa, haslo;
 };
-
+/*
 bool sprawdzNumerIDuzytkownika (int idZalogowanegoUzytkownika, int sprawdzanyNumerUzytkownika) {
 
 if (idZalogowanegoUzytkownika==sprawdzanyNumerUzytkownika)
@@ -28,7 +28,7 @@ if (idZalogowanegoUzytkownika==sprawdzanyNumerUzytkownika)
         return false;
 
 }
-
+*/
 
 int sprawdzIloscKontaktow(vector<kontakt> &kontakty) {
     int iloscKontaktow=0;
@@ -680,23 +680,51 @@ int usunKontakty (vector<kontakt> &kontakty, int iloscKontaktow) {
     return iloscKontaktow;
 }
 
-void zapiszNoweInformacjeWPliku (vector<kontakt> &kontakty) {
+void zapiszNoweInformacjeWPliku (vector<kontakt> &kontakty, vector<kontakt> &pelnaListaKontaktow, int nrIdKontaktuDoEdycji) {
 
     ofstream ksiazkaAdresowa;
 
-    ksiazkaAdresowa.open("Adresaci.txt", ios::out);
+    ksiazkaAdresowa.open("Adresaci_tymczasowy.txt", ios::out|ios::app);
 
-    for (auto &informacjeOkontakcie: kontakty) {
 
-        ksiazkaAdresowa<<informacjeOkontakcie.idKontaktu<<"|"<<informacjeOkontakcie.imie<<"|"<<informacjeOkontakcie.nazwisko<<"|"<<informacjeOkontakcie.nrTelefonu<<"|"<<informacjeOkontakcie.email<<"|"<<informacjeOkontakcie.adres<<"|";
+
+
+    for (auto &informacjeOkontakcie: pelnaListaKontaktow) {
+
+                    if (informacjeOkontakcie.idKontaktu==nrIdKontaktuDoEdycji){
+
+                        for (auto i = kontakty.begin(); i!=kontakty.end(); i++) {
+
+                    if(i->idKontaktu == nrIdKontaktuDoEdycji) {
+
+                        //kontakty.erase(i)
+                        ksiazkaAdresowa<<i->idKontaktu<<"|"<<i->idUzytkownika<<"|"<<i->imie<<"|"<<i->nazwisko<<"|"<<i->nrTelefonu<<"|"<<i->email<<"|"<<i->adres<<"|";
         ksiazkaAdresowa<<endl;
+
+                    }
+
+                }
+
+
+                    }
+                    else{
+
+        ksiazkaAdresowa<<informacjeOkontakcie.idKontaktu<<"|"<<informacjeOkontakcie.idUzytkownika<<"|"<<informacjeOkontakcie.imie<<"|"<<informacjeOkontakcie.nazwisko<<"|"<<informacjeOkontakcie.nrTelefonu<<"|"<<informacjeOkontakcie.email<<"|"<<informacjeOkontakcie.adres<<"|";
+        ksiazkaAdresowa<<endl;
+                    }
 
     }
     ksiazkaAdresowa.close();
 
+    //Sleep(3000);
+
+    remove("Adresaci.txt");
+    //Sleep(3000);
+    rename("Adresaci_tymczasowy.txt", "Adresaci.txt");
+
 }
 
-void edytujKontakt(vector<kontakt> &kontakty, int iloscKontaktow) {
+void edytujKontakt(vector<kontakt> &kontakty, vector<kontakt> &pelnaListaKontaktow , int iloscKontaktow) {
 
     int nrIdKontaktuDoEdycji;
 
@@ -750,10 +778,15 @@ void edytujKontakt(vector<kontakt> &kontakty, int iloscKontaktow) {
 
     }
 
-    cout<<"Podaj numer id kontaktu do edycji: ";
+    cout<<"Podaj numer id kontaktu do edycji, lub wpisz 0 by wrocic do poprzedniego menu: ";
     cin>>nrIdKontaktuDoEdycji;
 
+
+
     for (int i=0; i<iloscKontaktow; i++) {
+
+            if (nrIdKontaktuDoEdycji==0)
+        break;
 
         if(nrIdKontaktuDoEdycji==kontakty[i].idKontaktu) {
             char wybor;
@@ -775,7 +808,7 @@ void edytujKontakt(vector<kontakt> &kontakty, int iloscKontaktow) {
                 cin>>noweImie;
                 kontakty[i].imie=noweImie;
 
-                zapiszNoweInformacjeWPliku(kontakty);
+                zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
                 cout<<"Imie kontaktu zostalo zmienione"<<endl;
                 Sleep(1000);
@@ -789,7 +822,7 @@ void edytujKontakt(vector<kontakt> &kontakty, int iloscKontaktow) {
                 cin>>noweNazwisko;
                 kontakty[i].nazwisko=noweNazwisko;
 
-                zapiszNoweInformacjeWPliku(kontakty);
+                zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
                 cout<<"Nazwisko kontaktu zostalo zmienione"<<endl;
                 Sleep(1000);
@@ -802,7 +835,7 @@ void edytujKontakt(vector<kontakt> &kontakty, int iloscKontaktow) {
                 cin>>nowyNumerTelefonu;
                 kontakty[i].nrTelefonu=nowyNumerTelefonu;
 
-                zapiszNoweInformacjeWPliku(kontakty);
+                zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
                 cout<<"Numer telefonu kontaktu zostal zmieniony"<<endl;
                 Sleep(1000);
@@ -815,7 +848,7 @@ void edytujKontakt(vector<kontakt> &kontakty, int iloscKontaktow) {
                 cin>>nowyEmail;
                 kontakty[i].email=nowyEmail;
 
-                zapiszNoweInformacjeWPliku(kontakty);
+                zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
                 cout<<"Email kontaktu zostal zmieniony"<<endl;
                 Sleep(1000);
@@ -828,7 +861,7 @@ void edytujKontakt(vector<kontakt> &kontakty, int iloscKontaktow) {
                 cin>>nowyAdres;
                 kontakty[i].adres=nowyAdres;
 
-                zapiszNoweInformacjeWPliku(kontakty);
+                zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
                 cout<<"Adres kontaktu zostal zmieniony"<<endl;
                 Sleep(1000);
@@ -1186,7 +1219,7 @@ int main() {
             }
 
             else if (wybor=='6') {
-                edytujKontakt(kontakty, iloscKontaktow);
+                edytujKontakt(kontakty, pelnaListaKontaktow, iloscKontaktow);
             }
 
             else if (wybor == '7')
