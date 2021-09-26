@@ -1,8 +1,0 @@
-1|1|Alice|Withworth|777888999|alice@gmail.com|Dietershafen|
-2|3|Thomas|jakistam|777888999|thomas@gmail.com|dietershafen|
-3|1|Virgo|nieznane|777888999|virgo@gmail.com|dietershafen|
-4|2|Zoe|Withworth|777888999|withworth@gmail.com|zapomniana wyspa|
-5|2|Nathaniel|Vitharig|777888999|vitharig@gmail.com|zapomniana wyspa|
-6|3|Charlie|nieznane|777888999|charlotte@gmail.com|zapomniana wyspa|
-7|3|Rhys|nieznane|777888999|rhys@gmail.com|zapomniana wyspa|
-8|2|Shanon|Holiester|666999666|holiester@gmail.com|???|
