@@ -470,55 +470,6 @@ int usunKontakty (vector<kontakt> &kontakty, vector<kontakt> &pelnaListaKontakto
 
     int nrIdKontaktuDoUsuniecia=0;
 
-    while(1) {
-
-        system("cls");
-        string imieKontaktuDoUsuniecia="";
-        int licznik=0;
-
-        cout<<"Wpisz imie kontaktu do usuniecia: "<<endl;
-        cin>>imieKontaktuDoUsuniecia;
-        cout<<endl;
-
-        for (int i=0; i<iloscKontaktow; i++) {
-            if (kontakty[i].imie==imieKontaktuDoUsuniecia) {
-                cout<<kontakty[i].imie<<endl;
-                cout<<kontakty[i].nazwisko<<endl;
-                cout<<kontakty[i].nrTelefonu<<endl;
-                cout<<kontakty[i].email<<endl;
-                cout<<kontakty[i].adres<<endl;
-                cout<<"Numer ID kontaktu: "<<kontakty[i].idKontaktu<<endl;
-                cout<<endl;
-                licznik=1;
-
-            }
-
-        }
-
-        if (licznik==0) {
-            cout<<"Nie ma kontaktow o takim imieniu"<<endl;
-            cout<<"Wyszukac jeszcze raz? t/n"<<endl;
-            char odpowiedz;
-            cin>>odpowiedz;
-            cout<<endl;
-
-            if (odpowiedz=='t')
-                continue;
-
-            else
-                return iloscKontaktow;
-            Sleep(1500);
-
-
-        } else {
-
-            cout<<"Znaleziono kontakt(y)"<<endl;
-            break;
-
-        }
-
-    }
-
     cout<<"Podaj numer id kontaktu do usuniecia: ";
     cin>>nrIdKontaktuDoUsuniecia;
 
@@ -640,56 +591,6 @@ void zapiszNoweInformacjeWPliku (vector<kontakt> &kontakty, vector<kontakt> &pel
 void edytujKontakt(vector<kontakt> &kontakty, vector<kontakt> &pelnaListaKontaktow, int iloscKontaktow) {
 
     int nrIdKontaktuDoEdycji=0;
-
-    while(1) {
-
-        system("cls");
-        string imieKontaktuDoEdycji="";
-        int licznik=0;
-
-        cout<<"Wpisz imie kontaktu ktory chcesz edytowac: "<<endl;
-        cin>>imieKontaktuDoEdycji;
-        cout<<endl;
-
-        for (int i=0; i<iloscKontaktow; i++) {
-            if (kontakty[i].imie==imieKontaktuDoEdycji) {
-                cout<<kontakty[i].imie<<endl;
-                cout<<kontakty[i].nazwisko<<endl;
-                cout<<kontakty[i].nrTelefonu<<endl;
-                cout<<kontakty[i].email<<endl;
-                cout<<kontakty[i].adres<<endl;
-                cout<<"Numer ID kontaktu: "<<kontakty[i].idKontaktu<<endl;
-                cout<<endl;
-                licznik=1;
-
-            }
-
-        }
-
-        if (licznik==0) {
-            cout<<"Nie ma kontaktow o takim imieniu"<<endl;
-            cout<<"Wyszukac jeszcze raz? t/n"<<endl;
-            char odpowiedz;
-            cin>>odpowiedz;
-            cout<<endl;
-
-            if (odpowiedz=='t')
-                continue;
-
-            else
-                break;
-
-            Sleep(1500);
-
-
-        } else {
-
-            cout<<"Znaleziono kontakt(y)"<<endl;
-            break;
-
-        }
-
-    }
 
     cout<<"Podaj numer id kontaktu do edycji, lub wpisz 0 by wrocic do poprzedniego menu: ";
     cin>>nrIdKontaktuDoEdycji;
