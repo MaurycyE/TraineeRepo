@@ -812,6 +812,9 @@ int wczytajUzytkownikowZpliku (vector <Uzytkownik> &uzytkownicy) {
         string linia;
         int licznikZnakuPrzerwy=0;
         string danaInformacja="";
+        string nazwa ="";
+        string haslo ="";
+        int idUzytkownika =0;
 
         while(getline(listaUzytkownikow,linia)) {
 
@@ -830,7 +833,7 @@ int wczytajUzytkownikowZpliku (vector <Uzytkownik> &uzytkownicy) {
 
                         //zapisanyUzytkownik.idUzytkownika=atoi(numerIDuzytkownika.c_str());
 
-                        int idUzytkownika=atoi(numerIDuzytkownika.c_str());
+                         idUzytkownika=atoi(numerIDuzytkownika.c_str());
                         //uzytkownicy.push_back(zapisanyUzytkownik);
                        // iloscUzytkownikow++;
 
@@ -841,14 +844,14 @@ int wczytajUzytkownikowZpliku (vector <Uzytkownik> &uzytkownicy) {
                     if(licznikZnakuPrzerwy%3==2) {
 
                         //uzytkownicy[j].nazwa=danaInformacja;
-                        string nazwa=danaInformacja;
+                        nazwa=danaInformacja;
                         danaInformacja="";
                     }
 
                     if(licznikZnakuPrzerwy%3==0) {
 
                         //uzytkownicy[j].haslo=danaInformacja;
-                        string haslo = danaInformacja;
+                 haslo = danaInformacja;
                         danaInformacja="";
                         //j++;
                         Uzytkownik zapisanyUzytkownik(nazwa, haslo, idUzytkownika);
@@ -883,6 +886,16 @@ int rejestracja (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow ) {
 
     int i = 0;
 
+    while (Uzytkownik.sprawdzCzyNazwaUzytkownikaJestJuzZajeta(nazwa ,&uzytkownicy)==true){
+
+        cout<<"Taki uzytkownik istnieje. Wpisz inna nazwe uzytkownika: ";
+            cin>>nazwa;
+
+
+
+    }
+
+/*
     while (i<iloscUzytkownikow) {
         if (uzytkownicy[i].nazwa == nazwa) {
             cout<<"Taki uzytkownik istnieje. Wpisz inna nazwe uzytkownika: ";
@@ -893,6 +906,7 @@ int rejestracja (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow ) {
         else i++;
 
     }
+    */
     cout<<"Podaj haslo: ";
     cin>>haslo;
 
