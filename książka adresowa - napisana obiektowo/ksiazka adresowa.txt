@@ -1,0 +1,3 @@
+1|Rachel|Vitharig|999000999|vitharig@gmail.com|zapomniana wyspa|
+3|Nathaniel|Vitharig|888000111|vitharig@gmail.com|zaginiona wyspa|
+4|Blue|nieznane|999000999|virgo@gmail.com|dietershafen|

@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1621285395 source:c:\users\medion\desktop\maurycy\informatyka\kwiecieñ\seminarium - tworzenie rozbudowanych programów\ksi¹¿ka adresowa\main.cpp
+	<iostream>
+	<windows.h>
+	<stdio.h>
+	<conio.h>
+	<fstream>
+	<vector>
+
+1628790420 source:c:\users\medion\desktop\maurycy\informatyka\lipiec\ksi¹¿ka adresowa ulepszona\main.cpp
+	<iostream>
+	<windows.h>
+	<stdio.h>
+	<conio.h>
+	<fstream>
+	<vector>
+
+1632671009 source:c:\users\medion\desktop\maurycy\informatyka\wrzesieñ\traineerepo\ksi¹¿ka adresowa\main.cpp
+	<iostream>
+	<windows.h>
+	<stdio.h>
+	<conio.h>
+	<fstream>
+	<vector>
+
+1632771769 source:c:\users\medion\desktop\maurycy\informatyka\wrzesieñ\ksi¹¿ka adresowa + logowanie i rejestracja\ksi¹¿ka adresowa\main.cpp
+	<iostream>
+	<windows.h>
+	<stdio.h>
+	<conio.h>
+	<fstream>
+	<vector>
+
