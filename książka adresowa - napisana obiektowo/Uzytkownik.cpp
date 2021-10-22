@@ -10,12 +10,16 @@ Uzytkownik::Uzytkownik(string nazwa, string haslo, int idUzytkownika) {
     this->idUzytkownika=idUzytkownika;
 }
 
-/*
-Uzytkownik::~Uzytkownik()
-{
+Uzytkownik::Uzytkownik() {
+
+}
+
+
+Uzytkownik::~Uzytkownik() {
+    //cout<<"destruktor uruchomiony"<<endl;
     //dtor
 }
-*/
+
 
 string Uzytkownik::getterNazwa () {
 
@@ -29,17 +33,19 @@ string Uzytkownik::getterHaslo () {
 
 }
 
-int Uzytkownik::getterIdUzytkownika(){
+void Uzytkownik::setterHaslo(string haslo) {
 
-return idUzytkownika;
+    this->haslo=haslo;
+}
+
+int Uzytkownik::getterIdUzytkownika() {
+
+    return idUzytkownika;
 }
 
 
 
-bool sprawdzCzyNazwaUzytkownikaJestJuzWbazieDanych (string nazwa, vector <Uzytkownik> uzytkownicy) {
-
-
-//for (auto itr = uzytkownicy.begin(); itr != uzytkownicy.end(); itr++) {
+bool Uzytkownik::sprawdzCzyNazwaUzytkownikaJestJuzWbazieDanych (string nazwa, vector <Uzytkownik> uzytkownicy) {
 
     for (auto i=0; i<uzytkownicy.size(); i++) {
 
@@ -50,18 +56,13 @@ bool sprawdzCzyNazwaUzytkownikaJestJuzWbazieDanych (string nazwa, vector <Uzytko
         }
     }
 
-
-
     return false;
-
-
 }
 
-int znajdzUzytkownika (string nazwa, vector <Uzytkownik> uzytkownicy ) {
+int Uzytkownik::znajdzUzytkownika (string nazwa, vector <Uzytkownik> uzytkownicy ) {
 
 
- for (auto i=0; i<uzytkownicy.size(); i++) {
-
+    for (auto i=0; i<uzytkownicy.size(); i++) {
 
         if (uzytkownicy[i].getterNazwa()==nazwa) {
 
@@ -70,18 +71,14 @@ int znajdzUzytkownika (string nazwa, vector <Uzytkownik> uzytkownicy ) {
     }
 }
 
-bool sprawdzCzyHasloJestPoprawne (string haslo, int i, vector <Uzytkownik> uzytkownicy) {
+bool Uzytkownik:: sprawdzCzyHasloJestPoprawne (string haslo, int i, vector <Uzytkownik> uzytkownicy) {
 
     if (uzytkownicy[i].getterHaslo()==haslo) {
-            return true;
-
-
-
+        return true;
     }
+
     else
         return false;
-
-
 }
 
 

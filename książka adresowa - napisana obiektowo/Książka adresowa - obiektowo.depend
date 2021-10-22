@@ -14,12 +14,21 @@
 1634492601 c:\users\medion\desktop\maurycy\informatyka\paüdziernik\ksiπøka adresowa - napisana obiektowo\uzytkownik.h
 	<iostream>
 
-1634845487 source:c:\users\medion\desktop\maurycy\informatyka\git - repo\traineerepo\ksiπøka adresowa - napisana obiektowo\uzytkownik.cpp
+1634923569 source:c:\users\medion\desktop\maurycy\informatyka\git - repo\traineerepo\ksiπøka adresowa - napisana obiektowo\uzytkownik.cpp
 	"Uzytkownik.h"
 	<iostream>
 	<vector>
 
-1634845487 c:\users\medion\desktop\maurycy\informatyka\git - repo\traineerepo\ksiπøka adresowa - napisana obiektowo\uzytkownik.h
+1634924513 c:\users\medion\desktop\maurycy\informatyka\git - repo\traineerepo\ksiπøka adresowa - napisana obiektowo\uzytkownik.h
 	<iostream>
 	<vector>
+
+1634924362 source:c:\users\medion\desktop\maurycy\informatyka\git - repo\traineerepo\ksiπøka adresowa - napisana obiektowo\main.cpp
+	<iostream>
+	<windows.h>
+	<stdio.h>
+	<conio.h>
+	<fstream>
+	<vector>
+	"Uzytkownik.h"
 

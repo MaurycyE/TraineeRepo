@@ -807,7 +807,7 @@ int wczytajUzytkownikowZpliku (vector <Uzytkownik> &uzytkownicy) {
 
     else {
 
-        int j=0;
+       // int j=0;
 
         string linia;
         int licznikZnakuPrzerwy=0;
@@ -884,12 +884,12 @@ int rejestracja (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow ) {
     cin.sync();
     getline(cin, nazwa);
 
-    int i = 0;
+  //  int i = 0;
 
 
-    Uzytkownik obiektTestowy;
-    while (obiektTestowy.sprawdzCzyNazwaUzytkownikaJestJuzWbazieDanych(nazwa, uzytkownicy)==true) {
-    //if(obiektTestowy.sprawdzCzyNazwaUzytkownikaJestJuzZajeta(nazwa, uzytkownicy)==true) {
+    Uzytkownik obiektUzytkownik;
+    while (obiektUzytkownik.sprawdzCzyNazwaUzytkownikaJestJuzWbazieDanych(nazwa, uzytkownicy)==true) {
+    //if(obiektUzytkownik.sprawdzCzyNazwaUzytkownikaJestJuzZajeta(nazwa, uzytkownicy)==true) {
         cout<<"Taki uzytkownik istnieje. Wpisz inna nazwe uzytkownika: ";
             cin>>nazwa;
     }
@@ -944,16 +944,16 @@ int logowanie(vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow) {
 
 
 
-                Uzytkownik obiektTestowy;
+                Uzytkownik obiektUzytkownik;
 
-                if (obiektTestowy.sprawdzCzyNazwaUzytkownikaJestJuzWbazieDanych(nazwa, uzytkownicy)==false) {
+                if (obiektUzytkownik.sprawdzCzyNazwaUzytkownikaJestJuzWbazieDanych(nazwa, uzytkownicy)==false) {
                     cout<<"Nie ma uzytkownika z takim loginem"<<endl;
                     Sleep(1000);
                     return 0;
 
                 }
 
-               i=obiektTestowy.znajdzUzytkownika(nazwa, uzytkownicy);
+               i=obiektUzytkownik.znajdzUzytkownika(nazwa, uzytkownicy);
 
 
             for (int proby=0; proby<3; proby++) {
@@ -962,7 +962,7 @@ int logowanie(vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow) {
                 cin>>haslo;
 
                 //if (uzytkownicy[i].haslo == haslo) {
-                        if (obiektTestowy.sprawdzCzyHasloJestPoprawne (haslo, i, uzytkownicy)==true) {
+                        if (obiektUzytkownik.sprawdzCzyHasloJestPoprawne (haslo, i, uzytkownicy)==true) {
                     cout<<"Zalogowales sie."<<endl;
                     Sleep(1000);
 
@@ -1028,11 +1028,11 @@ void zapiszNoweInformacjeOuzytkowniku (vector<Uzytkownik> &uzytkownicy) {
     wszyscyUzytkownicy.open("Uzytkownicy.txt", ios::out);
 
     //for (auto &informacjeOuzytkowniku: uzytkownicy) {
-for (Uzytkownik obiektTestowy: uzytkownicy) {
+for (Uzytkownik obiektUzytkownik: uzytkownicy) {
         //wszyscyUzytkownicy<<informacjeOuzytkowniku.idUzytkownika<<"|"<<informacjeOuzytkowniku.nazwa<<"|"<<informacjeOuzytkowniku.haslo<<"|";
         //wszyscyUzytkownicy<<endl;
 
-        wszyscyUzytkownicy<<obiektTestowy.getterIdUzytkownika()<<"|"<<obiektTestowy.getterNazwa()<<"|"<<obiektTestowy.getterHaslo()<<"|";
+        wszyscyUzytkownicy<<obiektUzytkownik.getterIdUzytkownika()<<"|"<<obiektUzytkownik.getterNazwa()<<"|"<<obiektUzytkownik.getterHaslo()<<"|";
         wszyscyUzytkownicy<<endl;
 
     }
@@ -1044,15 +1044,19 @@ for (Uzytkownik obiektTestowy: uzytkownicy) {
 void zmianaHasla(vector <Uzytkownik> &uzytkownicy, int idZalogowanegoUzytkownika) {
 
     string haslo;
-   // Uzytkownik obiektTestowy;
+   // Uzytkownik obiektUzytkownik;
 
     cout<<"Podaj nowe haslo: ";
     cin>>haslo;
     for (int i=0; i<uzytkownicy.size(); i++) {
+
         if(uzytkownicy[i].getterIdUzytkownika()==idZalogowanegoUzytkownika) {
             //uzytkownicy[i].haslo=haslo;
-            uzytkownicy[i].getterHaslo()=haslo;
+           // cout<<uzytkownicy[i].getterHaslo()<<endl;
+  //  system("Pause");
+            uzytkownicy[i].setterHaslo(haslo);
             zapiszNoweInformacjeOuzytkowniku(uzytkownicy);
+            //cout<<uzytkownicy[i].getterHaslo()<<endl;
 
             cout<<"Haslo zostalo zmienione"<<endl;
             Sleep(1500);
