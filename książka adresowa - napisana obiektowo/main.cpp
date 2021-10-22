@@ -886,13 +886,12 @@ int rejestracja (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow ) {
 
     int i = 0;
 
-    while (Uzytkownik.sprawdzCzyNazwaUzytkownikaJestJuzZajeta(nazwa ,&uzytkownicy)==true){
 
+    Uzytkownik obiektTestowy;
+    while (obiektTestowy.sprawdzCzyNazwaUzytkownikaJestJuzWbazieDanych(nazwa, uzytkownicy)==true) {
+    //if(obiektTestowy.sprawdzCzyNazwaUzytkownikaJestJuzZajeta(nazwa, uzytkownicy)==true) {
         cout<<"Taki uzytkownik istnieje. Wpisz inna nazwe uzytkownika: ";
             cin>>nazwa;
-
-
-
     }
 
 /*
@@ -910,7 +909,8 @@ int rejestracja (vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow ) {
     cout<<"Podaj haslo: ";
     cin>>haslo;
 
-    Uzytkownik nowyUzytkownik(string nazwa, string haslo, int iloscUzytkownikow+1);
+    iloscUzytkownikow++;
+    Uzytkownik nowyUzytkownik(string nazwa, string haslo, int iloscUzytkownikow);
     //nowyUzytkownik.nazwa = nazwa;
     //nowyUzytkownik.haslo = haslo;
     //nowyUzytkownik.idUzytkownika = iloscUzytkownikow+1;
@@ -939,33 +939,50 @@ int logowanie(vector <Uzytkownik> &uzytkownicy, int iloscUzytkownikow) {
     getline(cin, nazwa);
     int i = 0;
 
-    while (i<iloscUzytkownikow) {
-        if (uzytkownicy[i].nazwa == nazwa) {
+    //while (i<iloscUzytkownikow) {
+       // if (uzytkownicy[i].nazwa == nazwa) {
+
+
+
+                Uzytkownik obiektTestowy;
+
+                if (obiektTestowy.sprawdzCzyNazwaUzytkownikaJestJuzWbazieDanych(nazwa, uzytkownicy)==false) {
+                    cout<<"Nie ma uzytkownika z takim loginem"<<endl;
+                    Sleep(1000);
+                    return 0;
+
+                }
+
+               i=obiektTestowy.znajdzUzytkownika(nazwa, uzytkownicy);
+
 
             for (int proby=0; proby<3; proby++) {
 
                 cout<<"Podaj haslo. Pozostalo prob "<<3-proby<<": ";
                 cin>>haslo;
 
-                if (uzytkownicy[i].haslo == haslo) {
+                //if (uzytkownicy[i].haslo == haslo) {
+                        if (obiektTestowy.sprawdzCzyHasloJestPoprawne (haslo, i, uzytkownicy)==true) {
                     cout<<"Zalogowales sie."<<endl;
                     Sleep(1000);
 
-                    return uzytkownicy[i].idUzytkownika;
+                    return uzytkownicy[i].getterIdUzytkownika();
+                    //return uzytkownicy[i].idUzytkownika;
                 }
 
             }
             cout<<"Podales 3 razy bledne haslo. Poczekaj 3 sekundy przed kolejna proba"<<endl;
             Sleep(3000);
             return 0;
-        }
+       // }
 
-        i++;
-    }
+        //i++;
 
+/*
     cout<<"Nie ma uzytkownika z takim loginem"<<endl;
     Sleep(1000);
     return 0;
+    */
 }
 
 int logowanieUzytkownika (vector<Uzytkownik> &uzytkownicy, int idZalogowanegoUzytkownika) {
@@ -1010,9 +1027,12 @@ void zapiszNoweInformacjeOuzytkowniku (vector<Uzytkownik> &uzytkownicy) {
 
     wszyscyUzytkownicy.open("Uzytkownicy.txt", ios::out);
 
-    for (auto &informacjeOuzytkowniku: uzytkownicy) {
+    //for (auto &informacjeOuzytkowniku: uzytkownicy) {
+for (Uzytkownik obiektTestowy: uzytkownicy) {
+        //wszyscyUzytkownicy<<informacjeOuzytkowniku.idUzytkownika<<"|"<<informacjeOuzytkowniku.nazwa<<"|"<<informacjeOuzytkowniku.haslo<<"|";
+        //wszyscyUzytkownicy<<endl;
 
-        wszyscyUzytkownicy<<informacjeOuzytkowniku.idUzytkownika<<"|"<<informacjeOuzytkowniku.nazwa<<"|"<<informacjeOuzytkowniku.haslo<<"|";
+        wszyscyUzytkownicy<<obiektTestowy.getterIdUzytkownika()<<"|"<<obiektTestowy.getterNazwa()<<"|"<<obiektTestowy.getterHaslo()<<"|";
         wszyscyUzytkownicy<<endl;
 
     }
@@ -1024,12 +1044,14 @@ void zapiszNoweInformacjeOuzytkowniku (vector<Uzytkownik> &uzytkownicy) {
 void zmianaHasla(vector <Uzytkownik> &uzytkownicy, int idZalogowanegoUzytkownika) {
 
     string haslo;
+   // Uzytkownik obiektTestowy;
 
     cout<<"Podaj nowe haslo: ";
     cin>>haslo;
     for (int i=0; i<uzytkownicy.size(); i++) {
-        if(uzytkownicy[i].idUzytkownika==idZalogowanegoUzytkownika) {
-            uzytkownicy[i].haslo=haslo;
+        if(uzytkownicy[i].getterIdUzytkownika()==idZalogowanegoUzytkownika) {
+            //uzytkownicy[i].haslo=haslo;
+            uzytkownicy[i].getterHaslo()=haslo;
             zapiszNoweInformacjeOuzytkowniku(uzytkownicy);
 
             cout<<"Haslo zostalo zmienione"<<endl;

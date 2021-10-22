@@ -9,18 +9,23 @@ using namespace std;
 class Uzytkownik
 {
     public:
+        Uzytkownik ();
         Uzytkownik(string nazwa, string haslo, int idUzytkownika);
         ~Uzytkownik();
-        bool sprawdzCzyNazwaUzytkownikaJestJuzZajeta (string nazwa, vector <Uzytkownik> &uzytkownicy);
-
+        bool sprawdzCzyNazwaUzytkownikaJestJuzWbazieDanych (string nazwa,vector <Uzytkownik> uzytkownicy);
+        string getterNazwa ();
+        string getterHaslo();
+        int getterIdUzytkownika();
+        bool sprawdzCzyHasloJestPoprawne (string haslo, int i, vector <Uzytkownik> uzytkownicy);
+        int znajdzUzytkownika(string nazwa, vector <Uzytkownik> uzytkownicy);
         //sprawdzNajwiekszaLiczbeIdUzytkownika();
-
+        //vector<Uzytkownik> uzytkownicy;
 
     private:
         int idUzytkownika;
     string nazwa;
     string haslo;
-    //vector<Uzytkownik> uzytkownicy;
+    vector<Uzytkownik> uzytkownicy;
 
 
 };
