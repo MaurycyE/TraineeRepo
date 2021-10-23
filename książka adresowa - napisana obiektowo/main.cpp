@@ -399,6 +399,15 @@ int dodajKontakt (vector<kontakt> &pelnaListaKontaktow, vector<kontakt> &kontakt
 
 void wyswietlWszystkieKontakty (vector<kontakt> &kontakty, int iloscKontaktow) {
 
+    if (kontakty.size()==0) {
+
+        cout<<"Brak zapisanych kontaktow"<<endl;
+        Sleep(1000);
+        return ;
+
+    }
+
+
     for (int i=0; i<iloscKontaktow; i++) {
         cout<<kontakty[i].idUzytkownika<<endl;
         cout<<kontakty[i].imie<<endl;
@@ -1162,6 +1171,7 @@ int main() {
             }
 
             else if (wybor=='9') {
+                    cout<<"ZAMYKANIE PROGRAMU"<<endl;
                 exit(0);
             }
         }

@@ -12,9 +12,9 @@ public:
     Uzytkownik(string nazwa, string haslo, int idUzytkownika);
     ~Uzytkownik();
     bool sprawdzCzyNazwaUzytkownikaJestJuzWbazieDanych (string nazwa,vector <Uzytkownik> uzytkownicy);
-    string getterNazwa ();
-    string getterHaslo();
-    int getterIdUzytkownika();
+    string getterNazwa()const ;
+    string getterHaslo() const;
+    int getterIdUzytkownika() const;
     void setterHaslo(string haslo);
     bool sprawdzCzyHasloJestPoprawne (string haslo, int i, vector <Uzytkownik> uzytkownicy);
     int znajdzUzytkownika(string nazwa, vector <Uzytkownik> uzytkownicy);

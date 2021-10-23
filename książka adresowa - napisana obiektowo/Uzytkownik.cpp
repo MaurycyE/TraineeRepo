@@ -21,13 +21,13 @@ Uzytkownik::~Uzytkownik() {
 }
 
 
-string Uzytkownik::getterNazwa () {
+string Uzytkownik::getterNazwa () const {
 
     return nazwa;
 
 }
 
-string Uzytkownik::getterHaslo () {
+string Uzytkownik::getterHaslo () const {
 
     return haslo;
 
@@ -38,7 +38,7 @@ void Uzytkownik::setterHaslo(string haslo) {
     this->haslo=haslo;
 }
 
-int Uzytkownik::getterIdUzytkownika() {
+int Uzytkownik::getterIdUzytkownika() const {
 
     return idUzytkownika;
 }
