@@ -81,4 +81,16 @@ bool Uzytkownik:: sprawdzCzyHasloJestPoprawne (string haslo, int i, vector <Uzyt
         return false;
 }
 
+string Uzytkownik:: wyswietlZalogowanegoUzytkownika(int idUzytkownika, vector <Uzytkownik> uzytkownicy) {
+
+for (auto i=0; i<uzytkownicy.size(); i++) {
+
+        if (uzytkownicy[i].getterIdUzytkownika()==idUzytkownika) {
+
+            return uzytkownicy[i].getterNazwa();
+        }
+    }
+
+
+}
 

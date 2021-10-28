@@ -1,4 +1,4 @@
-1|Virgo|Virgo13|
+1|Virgo|Virgo11|
 2|Rachel|Rachel13|
 3|Blue|Kolorek13|
 4|Luna|Luna13|

@@ -18,6 +18,7 @@ public:
     void setterHaslo(string haslo);
     bool sprawdzCzyHasloJestPoprawne (string haslo, int i, vector <Uzytkownik> uzytkownicy);
     int znajdzUzytkownika(string nazwa, vector <Uzytkownik> uzytkownicy);
+    string wyswietlZalogowanegoUzytkownika(int idUzytkownika, vector <Uzytkownik> uzytkownicy);
 
 
 private:

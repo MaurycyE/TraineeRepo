@@ -10,7 +10,7 @@ Kontakty::Kontakty() {
     //ctor
 }
 
-Kontakty::Kontakty (int idUzytkownika, string imie, string nazwisko, string nrTelefonu, string email, string adres): idUzytkownika(idUzytkownika), imie(imie), nazwisko(nazwisko), nrTelefonu(nrTelefonu), email(email), adres(adres) {
+Kontakty::Kontakty (int idKontaktu, int idUzytkownika, string imie, string nazwisko, string nrTelefonu, string email, string adres): idKontaktu(idKontaktu), idUzytkownika(idUzytkownika), imie(imie), nazwisko(nazwisko), nrTelefonu(nrTelefonu), email(email), adres(adres) {
 
 }
 
@@ -37,10 +37,10 @@ int Kontakty::getterIdUzytkownika() {
 
 }
 
-void Kontakty::wyswietlListeKontaktow() {//vector<Kontakty> &kontakty){
+void Kontakty::wyswietlListeKontaktow(vector<Kontakty> &kontakty) {//vector<Kontakty> &kontakty){
 
-    cout<<kontakty.size()<<endl;
-    system("pause");
+    //cout<<kontakty.size()<<endl;
+    //system("pause");
 
     for (auto i=0; i<kontakty.size(); i++) {
         cout<<"Numer ID Uzytkownika: "<<kontakty[i].idUzytkownika<<endl;
@@ -53,14 +53,14 @@ void Kontakty::wyswietlListeKontaktow() {//vector<Kontakty> &kontakty){
         cout<<endl;
 
     }
-cout<<endl<<"Nacisnij enter zeby powrocic do poprzedniego menu";
-   system("pause");
-    //getchar();
-    //getchar();
+    cout<<endl<<"Nacisnij enter zeby powrocic do poprzedniego menu";
+    //system("pause");
+    getchar();
+    getchar();
 
 }
 
-void Kontakty::sprawdzCzyPodaneImieJestWbazieDanych (string imie) {
+void Kontakty::sprawdzCzyPodaneImieJestWbazieDanych (string imie, vector<Kontakty> &kontakty) {
 
     for (auto i=0; i<kontakty.size(); i++) {
 
@@ -83,7 +83,7 @@ void Kontakty::sprawdzCzyPodaneImieJestWbazieDanych (string imie) {
     cout<<"Nie ma kontaktow o takim imieniu"<<endl;
 }
 
-void Kontakty::sprawdzCzyPodaneNazwiskoJestWbazieDanych (string nazwisko) {
+void Kontakty::sprawdzCzyPodaneNazwiskoJestWbazieDanych (string nazwisko, vector<Kontakty> &kontakty) {
 
     for (auto i=0; i<kontakty.size(); i++) {
 
@@ -109,70 +109,70 @@ void Kontakty::sprawdzCzyPodaneNazwiskoJestWbazieDanych (string nazwisko) {
 void Kontakty::usunPozycjeZwektora (int nrIdKontaktuDoUsuniecia, vector<Kontakty> &danyWektor ) {
 
 
-                       // for(auto i=0; i<kontakty.size(); i++){
-                    //Kontakty danyKontakt;
-                    //if(i->idKontaktu == nrIdKontaktuDoUsuniecia) {
+    // for(auto i=0; i<kontakty.size(); i++){
+    //Kontakty danyKontakt;
+    //if(i->idKontaktu == nrIdKontaktuDoUsuniecia) {
 
-                    for (auto i = danyWektor.begin(); i!=danyWektor.end(); i++) {
-                            if(i->idKontaktu == nrIdKontaktuDoUsuniecia) {
+    for (auto i = danyWektor.begin(); i!=danyWektor.end(); i++) {
+        if(i->idKontaktu == nrIdKontaktuDoUsuniecia) {
 
-                   // if(kontakty[i].getterIdKontaktu() == nrIdKontaktuDoUsuniecia) {
+            // if(kontakty[i].getterIdKontaktu() == nrIdKontaktuDoUsuniecia) {
 
 
-                    //usunPozycjeZwektora (i);
-                        danyWektor.erase(i);
-                        break;
-                    }
+            //usunPozycjeZwektora (i);
+            danyWektor.erase(i);
+            break;
+        }
 
-                }
+    }
 
 
 }
 
-void Kontakty::usunKontaktZplikuTekstowego (int nrIdKontaktuDoUsuniecia) {
+void Kontakty::usunKontaktZplikuTekstowego (int nrIdKontaktuDoUsuniecia, vector<Kontakty> &pelnaListaKontaktow) {
 
-  ofstream ksiazkaAdresowa;
+    ofstream ksiazkaAdresowa;
 
-                ksiazkaAdresowa.open("Adresaci_tymczasowy.txt", ios::out|ios::app);
+    ksiazkaAdresowa.open("Adresaci_tymczasowy.txt", ios::out|ios::app);
 
-                /*
-                for (auto &informacjeOkontakcie: pelnaListaKontaktow) {
+    /*
+    for (auto &informacjeOkontakcie: pelnaListaKontaktow) {
 
-                    if (informacjeOkontakcie.idKontaktu==nrIdKontaktuDoUsuniecia) {
+        if (informacjeOkontakcie.idKontaktu==nrIdKontaktuDoUsuniecia) {
 
-                        ksiazkaAdresowa<<"";
+            ksiazkaAdresowa<<"";
 
-                    }
-                    */
+        }
+        */
 
-                    for (Kontakty informacjeOkontakcie: pelnaListaKontaktow) {
+    for (Kontakty informacjeOkontakcie: pelnaListaKontaktow) {
 
-                    if (informacjeOkontakcie.idKontaktu==nrIdKontaktuDoUsuniecia) {
+        if (informacjeOkontakcie.idKontaktu==nrIdKontaktuDoUsuniecia) {
 
-                        ksiazkaAdresowa<<"";
+            ksiazkaAdresowa<<"";
 
-                    }
+        }
 
-                    else {
+        else {
 
-                        ksiazkaAdresowa<<informacjeOkontakcie.idKontaktu<<"|"<<informacjeOkontakcie.idUzytkownika<<"|"<<informacjeOkontakcie.imie<<"|"<<informacjeOkontakcie.nazwisko<<"|"<<informacjeOkontakcie.nrTelefonu<<"|"<<informacjeOkontakcie.email<<"|"<<informacjeOkontakcie.adres<<"|";
-                        ksiazkaAdresowa<<endl;
-                    }
+            ksiazkaAdresowa<<informacjeOkontakcie.idKontaktu<<"|"<<informacjeOkontakcie.idUzytkownika<<"|"<<informacjeOkontakcie.imie<<"|"<<informacjeOkontakcie.nazwisko<<"|"<<informacjeOkontakcie.nrTelefonu<<"|"<<informacjeOkontakcie.email<<"|"<<informacjeOkontakcie.adres<<"|";
+            ksiazkaAdresowa<<endl;
+        }
 
-                }
-                ksiazkaAdresowa.close();
+    }
+    ksiazkaAdresowa.close();
 
-                remove("Adresaci.txt");
+    remove("Adresaci.txt");
 
     rename("Adresaci_tymczasowy.txt", "Adresaci.txt");
 
 
 }
 
-void Kontakty:: zapiszZmianyOkontakcieWplikuTekstowym(int nrIdKontaktuDoEdycji) {
+void Kontakty:: zapiszZmianyOkontakcieWplikuTekstowym(int nrIdKontaktuDoEdycji, vector<Kontakty> &pelnaListaKontaktow) {
 
 
-ofstream ksiazkaAdresowa;
+    ofstream ksiazkaAdresowa;
 
     ksiazkaAdresowa.open("Adresaci_tymczasowy.txt", ios::out|ios::app);
 
@@ -205,12 +205,12 @@ ofstream ksiazkaAdresowa;
 
 }
 
-void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji) {
+void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontakty, vector<Kontakty> &pelnaListaKontaktow) {
 
     for (int i=0; i<kontakty.size(); i++) {
 
         if (nrIdKontaktuDoEdycji==0)
-           break;
+            break;
 
         if(nrIdKontaktuDoEdycji==kontakty[i].idKontaktu) {
             char wybor;
@@ -232,7 +232,7 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji) {
                 kontakty[i].imie=noweImie;
 
                 //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
-                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji);
+                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow);
 
                 cout<<"Imie kontaktu zostalo zmienione"<<endl;
                 Sleep(1000);
@@ -248,7 +248,7 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji) {
 
                 //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
-                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji);
+                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow);
 
                 cout<<"Nazwisko kontaktu zostalo zmienione"<<endl;
                 Sleep(1000);
@@ -263,7 +263,7 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji) {
 
                 //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
-                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji);
+                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow);
 
                 cout<<"Numer telefonu kontaktu zostal zmieniony"<<endl;
                 Sleep(1000);
@@ -278,7 +278,7 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji) {
 
                 //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
-                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji);
+                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow);
 
                 cout<<"Email kontaktu zostal zmieniony"<<endl;
                 Sleep(1000);
@@ -294,7 +294,7 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji) {
 
                 //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
-                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji);
+                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow);
 
                 cout<<"Adres kontaktu zostal zmieniony"<<endl;
                 Sleep(1000);
