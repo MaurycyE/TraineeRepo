@@ -34,6 +34,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Kontakty.cpp" />
+		<Unit filename="Kontakty.h" />
 		<Unit filename="Uzytkownik.cpp" />
 		<Unit filename="Uzytkownik.h" />
 		<Unit filename="main.cpp" />

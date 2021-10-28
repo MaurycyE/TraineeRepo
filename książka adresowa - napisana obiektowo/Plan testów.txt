@@ -1,0 +1,14 @@
+1. funkcja dodawania kontaktów [t]
+2. funkcja wyszukiwania kontaktów po imieniu i nazwisku [n]
+3. funkcja wyświetlania wszystkich kontaktów [n]
+4. funkcja usuwania kontaktów [ ]
+5. funkcja edycji kontaktów [ ]
+6. funkcja zmiany uzytkownika wraz z wszystkimi powyzszymi funkcjami [ ]
+7. poprawne przydzielanie numerów ID kontaktom [ ]
+8. poprawne zapisywanie informacji w pliku [ ]
+9. komunikat "brak zapisanych kontaktom" podczas wybierania opcji wyświetl wszystkie kontakty
+10.komunikat o potwierdzeniu usunięciu kontaktu [ ]
+11.komunikat "nie ma kontaktu o takim numerze id" podczas usuwania kontaktu
+12.komunikat "taki uzytkownik istnieje..." podczas rejestracji
+13.komunikat "nie ma uzytkownika z takim loginem" podczas logowanie
+14.funkcja zmiany hasła [ ]
