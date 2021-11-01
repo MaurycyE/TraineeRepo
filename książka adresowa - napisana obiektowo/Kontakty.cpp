@@ -50,10 +50,7 @@ return nazwisko;
 }
 
 
-void Kontakty::wyswietlListeKontaktow(vector<Kontakty> &kontakty) {//vector<Kontakty> &kontakty){
-
-    //cout<<kontakty.size()<<endl;
-    //system("pause");
+void Kontakty::wyswietlListeKontaktow(vector<Kontakty> &kontakty) {
 
     for (auto i=0; i<kontakty.size(); i++) {
         cout<<"Numer ID Uzytkownika: "<<kontakty[i].idUzytkownika<<endl;
@@ -67,7 +64,6 @@ void Kontakty::wyswietlListeKontaktow(vector<Kontakty> &kontakty) {//vector<Kont
 
     }
     cout<<endl<<"Nacisnij enter zeby powrocic do poprzedniego menu";
-    //system("pause");
     getchar();
     getchar();
 
@@ -89,8 +85,6 @@ void Kontakty::sprawdzCzyPodaneImieJestWbazieDanych (string imie, vector<Kontakt
             cout<<endl;
             return;
         }
-        //else
-
 
     }
     cout<<"Nie ma kontaktow o takim imieniu"<<endl;
@@ -112,8 +106,6 @@ void Kontakty::sprawdzCzyPodaneNazwiskoJestWbazieDanych (string nazwisko, vector
             cout<<endl;
             return;
         }
-        //else
-
 
     }
     cout<<"Nie ma kontaktow o takim nazwisku"<<endl;
@@ -121,24 +113,14 @@ void Kontakty::sprawdzCzyPodaneNazwiskoJestWbazieDanych (string nazwisko, vector
 
 void Kontakty::usunPozycjeZwektora (int nrIdKontaktuDoUsuniecia, vector<Kontakty> &danyWektor ) {
 
-
-    // for(auto i=0; i<kontakty.size(); i++){
-    //Kontakty danyKontakt;
-    //if(i->idKontaktu == nrIdKontaktuDoUsuniecia) {
-
     for (auto i = danyWektor.begin(); i!=danyWektor.end(); i++) {
         if(i->idKontaktu == nrIdKontaktuDoUsuniecia) {
 
-            // if(kontakty[i].getterIdKontaktu() == nrIdKontaktuDoUsuniecia) {
-
-
-            //usunPozycjeZwektora (i);
             danyWektor.erase(i);
             break;
         }
 
     }
-
 
 }
 
@@ -147,16 +129,6 @@ void Kontakty::usunKontaktZplikuTekstowego (int nrIdKontaktuDoUsuniecia, vector<
     ofstream ksiazkaAdresowa;
 
     ksiazkaAdresowa.open("Adresaci_tymczasowy.txt", ios::out|ios::app);
-
-    /*
-    for (auto &informacjeOkontakcie: pelnaListaKontaktow) {
-
-        if (informacjeOkontakcie.idKontaktu==nrIdKontaktuDoUsuniecia) {
-
-            ksiazkaAdresowa<<"";
-
-        }
-        */
 
     for (Kontakty informacjeOkontakcie: pelnaListaKontaktow) {
 
@@ -179,11 +151,9 @@ void Kontakty::usunKontaktZplikuTekstowego (int nrIdKontaktuDoUsuniecia, vector<
 
     rename("Adresaci_tymczasowy.txt", "Adresaci.txt");
 
-
 }
 
 void Kontakty:: zapiszZmianyOkontakcieWplikuTekstowym(int nrIdKontaktuDoEdycji, vector<Kontakty> &pelnaListaKontaktow, vector<Kontakty> &kontakty) {
-
 
     ofstream ksiazkaAdresowa;
 
@@ -246,7 +216,6 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontak
                 cin>>noweImie;
                 kontakty[i].imie=noweImie;
 
-                //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
                 zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow, kontakty);
 
                 cout<<"Imie kontaktu zostalo zmienione"<<endl;
@@ -261,8 +230,6 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontak
                 cin>>noweNazwisko;
                 kontakty[i].nazwisko=noweNazwisko;
 
-                //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
-
                 zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow, kontakty);
 
                 cout<<"Nazwisko kontaktu zostalo zmienione"<<endl;
@@ -275,8 +242,6 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontak
                 cout<<"Wprowadz nowy numer telefonu:"<<endl;
                 cin>>nowyNumerTelefonu;
                 kontakty[i].nrTelefonu=nowyNumerTelefonu;
-
-                //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
                 zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow, kontakty);
 
@@ -291,8 +256,6 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontak
                 cin>>nowyEmail;
                 kontakty[i].email=nowyEmail;
 
-                //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
-
                 zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow, kontakty);
 
                 cout<<"Email kontaktu zostal zmieniony"<<endl;
@@ -306,8 +269,6 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontak
                 cin.sync();
                 getline(cin, nowyAdres);
                 kontakty[i].adres=nowyAdres;
-
-                //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
                 zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow, kontakty);
 
@@ -324,8 +285,5 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontak
 
         }
     }
-
-
-
 
 }

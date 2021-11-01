@@ -16,7 +16,6 @@ Uzytkownik::Uzytkownik() {
 
 
 Uzytkownik::~Uzytkownik() {
-    //cout<<"destruktor uruchomiony"<<endl;
     //dtor
 }
 

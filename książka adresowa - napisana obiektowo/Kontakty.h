@@ -19,7 +19,7 @@ class Kontakty
         string getterImie();
         string getterNazwisko();
         void setterIdKontaktu(int idKontaktu);
-        void wyswietlListeKontaktow(vector<Kontakty> &kontakty); //vector<Kontakty> &kontakty);
+        void wyswietlListeKontaktow(vector<Kontakty> &kontakty);
         void sprawdzCzyPodaneImieJestWbazieDanych (string imie, vector<Kontakty> &kontakty);
         void sprawdzCzyPodaneNazwiskoJestWbazieDanych (string nazwisko, vector<Kontakty> &kontakty);
         void usunPozycjeZwektora (int nrIdKontaktuDoUsuniecia, vector<Kontakty> &danyWektor);
