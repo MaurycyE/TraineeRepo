@@ -338,6 +338,7 @@ int wczytajOsobyZpliku (vector<Kontakty> &kontakty, int idZalogowanegoUzytkownik
 
     int iloscKontaktow=kontakty.size();
 
+
     return iloscKontaktow;
 
 }
@@ -442,9 +443,15 @@ int dodajKontakt (vector<Kontakty> &pelnaListaKontaktow, vector<Kontakty> &konta
 
     wczytajIdKontaktuPoDodaniuNowejOsoby(pelnaListaKontaktow);
 
-    kontakty=pelnaListaKontaktow;
+    //kontakty=pelnaListaKontaktow;
+
+    kontakty.erase(kontakty.begin(), kontakty.end());
 
     wczytajOsobyZpliku(kontakty, idUzytkownika);
+    //cout<<kontakty.size()<<endl;
+    //system("pause");
+
+
 
     return iloscKontaktow+1;
 
@@ -609,6 +616,7 @@ int usunKontakty (vector<Kontakty> &kontakty, vector<Kontakty> &pelnaListaKontak
 
         //if(nrIdKontaktuDoUsuniecia==kontakty[i].idKontaktu) {
                 if(nrIdKontaktuDoUsuniecia==kontakty[i].getterIdKontaktu()) {
+                        cout<<"Znaleziono kontakt: "<<kontakty[i].getterImie()<<" "<<kontakty[i].getterNazwisko()<<endl;
 
             char odpowiedzUzytkownika;
             string liniaDoUsuniecia;
@@ -716,7 +724,7 @@ int usunKontakty (vector<Kontakty> &kontakty, vector<Kontakty> &pelnaListaKontak
 void zapiszNoweInformacjeWPliku (vector<Kontakty> &kontakty, vector<Kontakty> &pelnaListaKontaktow, int nrIdKontaktuDoEdycji) {
 
     Kontakty kontaktDoEdycji;
- kontaktDoEdycji.zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow);
+ kontaktDoEdycji.zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow, kontakty);
 
 /*
     ofstream ksiazkaAdresowa;

@@ -1,9 +1,0 @@
-3|1|Virgo|nieznane|777888999|virgo@gmail.com|dietershafen|
-4|2|Zoe|Withworth|777888999|withworth@gmail.com|zapomniana wyspa|
-6|3|Charlotte|nieznane|777888999|charlotte@gmail.com|zapomniana wyspa|
-7|3|Rhys|nieznane|777888999|rhys@gmail.com|zapomniana wyspa|
-11|6|Roderick|Springfield|777888999|roderick@gmail.com|Hargendorf|
-13|1|Alice|Holiester|666888999|alice@gmail.com|Dietershafen|
-14|4|Eklipsa|Holiester|666999666|holiester@gmail.com|nieznany|
-15|2|Nathaniel|Vitharig|777888999|vitharig@gmail.com|rezydencja Vitharig|
-16|2|Pan|Warden|777888999|warden@gmail.com|zaginiona wyspa|

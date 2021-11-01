@@ -16,13 +16,15 @@ class Kontakty
 
         int getterIdKontaktu();
         int getterIdUzytkownika();
+        string getterImie();
+        string getterNazwisko();
         void setterIdKontaktu(int idKontaktu);
         void wyswietlListeKontaktow(vector<Kontakty> &kontakty); //vector<Kontakty> &kontakty);
         void sprawdzCzyPodaneImieJestWbazieDanych (string imie, vector<Kontakty> &kontakty);
         void sprawdzCzyPodaneNazwiskoJestWbazieDanych (string nazwisko, vector<Kontakty> &kontakty);
         void usunPozycjeZwektora (int nrIdKontaktuDoUsuniecia, vector<Kontakty> &danyWektor);
         void usunKontaktZplikuTekstowego (int nrIdKontaktuDoUsuniecia, vector<Kontakty> &pelnaListaKontaktow);
-        void zapiszZmianyOkontakcieWplikuTekstowym(int nrIdKontaktuDoEdycji, vector<Kontakty> &pelnaListaKontaktow);
+        void zapiszZmianyOkontakcieWplikuTekstowym(int nrIdKontaktuDoEdycji, vector<Kontakty> &pelnaListaKontaktow,vector<Kontakty> &kontakty);
         void edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontakty, vector<Kontakty> &pelnaListaKontaktow);
 
     //protected:

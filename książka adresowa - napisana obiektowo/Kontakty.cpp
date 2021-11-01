@@ -37,6 +37,19 @@ int Kontakty::getterIdUzytkownika() {
 
 }
 
+string Kontakty::getterImie(){
+
+return imie;
+
+}
+
+string Kontakty::getterNazwisko(){
+
+return nazwisko;
+
+}
+
+
 void Kontakty::wyswietlListeKontaktow(vector<Kontakty> &kontakty) {//vector<Kontakty> &kontakty){
 
     //cout<<kontakty.size()<<endl;
@@ -169,7 +182,7 @@ void Kontakty::usunKontaktZplikuTekstowego (int nrIdKontaktuDoUsuniecia, vector<
 
 }
 
-void Kontakty:: zapiszZmianyOkontakcieWplikuTekstowym(int nrIdKontaktuDoEdycji, vector<Kontakty> &pelnaListaKontaktow) {
+void Kontakty:: zapiszZmianyOkontakcieWplikuTekstowym(int nrIdKontaktuDoEdycji, vector<Kontakty> &pelnaListaKontaktow, vector<Kontakty> &kontakty) {
 
 
     ofstream ksiazkaAdresowa;
@@ -200,7 +213,9 @@ void Kontakty:: zapiszZmianyOkontakcieWplikuTekstowym(int nrIdKontaktuDoEdycji, 
     }
     ksiazkaAdresowa.close();
 
+remove("Adresaci.txt");
 
+    rename("Adresaci_tymczasowy.txt", "Adresaci.txt");
 
 
 }
@@ -232,7 +247,7 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontak
                 kontakty[i].imie=noweImie;
 
                 //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
-                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow);
+                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow, kontakty);
 
                 cout<<"Imie kontaktu zostalo zmienione"<<endl;
                 Sleep(1000);
@@ -248,7 +263,7 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontak
 
                 //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
-                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow);
+                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow, kontakty);
 
                 cout<<"Nazwisko kontaktu zostalo zmienione"<<endl;
                 Sleep(1000);
@@ -263,7 +278,7 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontak
 
                 //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
-                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow);
+                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow, kontakty);
 
                 cout<<"Numer telefonu kontaktu zostal zmieniony"<<endl;
                 Sleep(1000);
@@ -278,7 +293,7 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontak
 
                 //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
-                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow);
+                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow, kontakty);
 
                 cout<<"Email kontaktu zostal zmieniony"<<endl;
                 Sleep(1000);
@@ -294,7 +309,7 @@ void Kontakty::edytujKontakty(int nrIdKontaktuDoEdycji, vector<Kontakty> &kontak
 
                 //zapiszNoweInformacjeWPliku(kontakty, pelnaListaKontaktow, nrIdKontaktuDoEdycji );
 
-                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow);
+                zapiszZmianyOkontakcieWplikuTekstowym( nrIdKontaktuDoEdycji, pelnaListaKontaktow, kontakty);
 
                 cout<<"Adres kontaktu zostal zmieniony"<<endl;
                 Sleep(1000);
